@@ -133,5 +133,10 @@ namespace WindowsFormsApp1
         {
             abrirFormularioHijo(new Perfil(lbRut.Text));
         }
+
+        private void btnRegistroVentas_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new Form_Registro_Ventas());
+        }
     }
 }

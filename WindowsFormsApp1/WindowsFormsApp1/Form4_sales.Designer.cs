@@ -37,9 +37,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.TextBox();
-            this.txtCodVenta = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtProveedor = new System.Windows.Forms.TextBox();
@@ -70,9 +68,7 @@
             this.panelPropiedades.Controls.Add(this.label7);
             this.panelPropiedades.Controls.Add(this.lbTotal);
             this.panelPropiedades.Controls.Add(this.txtFecha);
-            this.panelPropiedades.Controls.Add(this.txtCodVenta);
             this.panelPropiedades.Controls.Add(this.label9);
-            this.panelPropiedades.Controls.Add(this.label10);
             this.panelPropiedades.Controls.Add(this.label11);
             this.panelPropiedades.Controls.Add(this.txtPrecio);
             this.panelPropiedades.Controls.Add(this.txtProveedor);
@@ -137,41 +133,21 @@
             // 
             this.txtFecha.Enabled = false;
             this.txtFecha.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFecha.Location = new System.Drawing.Point(196, 469);
+            this.txtFecha.Location = new System.Drawing.Point(196, 424);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(226, 30);
             this.txtFecha.TabIndex = 23;
-            // 
-            // txtCodVenta
-            // 
-            this.txtCodVenta.Enabled = false;
-            this.txtCodVenta.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodVenta.Location = new System.Drawing.Point(196, 428);
-            this.txtCodVenta.Name = "txtCodVenta";
-            this.txtCodVenta.Size = new System.Drawing.Size(226, 30);
-            this.txtCodVenta.TabIndex = 22;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(15, 477);
+            this.label9.Location = new System.Drawing.Point(15, 432);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 22);
             this.label9.TabIndex = 19;
             this.label9.Text = "FECHA";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(15, 436);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(123, 22);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "COD VENTA";
             // 
             // label11
             // 
@@ -363,7 +339,7 @@
             this.txtIngresoProducto.Location = new System.Drawing.Point(115, 68);
             this.txtIngresoProducto.Name = "txtIngresoProducto";
             this.txtIngresoProducto.Size = new System.Drawing.Size(410, 30);
-            this.txtIngresoProducto.TabIndex = 2;
+            this.txtIngresoProducto.TabIndex = 1;
             this.txtIngresoProducto.Text = "Buscar Producto";
             this.txtIngresoProducto.Enter += new System.EventHandler(this.txtIngresoProducto_Enter);
             this.txtIngresoProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIngresoProducto_KeyPress);
@@ -388,7 +364,7 @@
             this.txtCantidad.Location = new System.Drawing.Point(51, 68);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(58, 30);
-            this.txtCantidad.TabIndex = 1;
+            this.txtCantidad.TabIndex = 2;
             this.txtCantidad.Text = "1";
             this.txtCantidad.Enter += new System.EventHandler(this.txtCantidad_Enter);
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
@@ -416,7 +392,7 @@
             this.btnDisminuirCantidad.Location = new System.Drawing.Point(295, 559);
             this.btnDisminuirCantidad.Name = "btnDisminuirCantidad";
             this.btnDisminuirCantidad.Size = new System.Drawing.Size(50, 41);
-            this.btnDisminuirCantidad.TabIndex = 20;
+            this.btnDisminuirCantidad.TabIndex = 5;
             this.btnDisminuirCantidad.Text = "-";
             this.btnDisminuirCantidad.UseVisualStyleBackColor = true;
             this.btnDisminuirCantidad.Click += new System.EventHandler(this.btnDisminuirCantidad_Click);
@@ -466,9 +442,7 @@
         private System.Windows.Forms.TextBox txtIngresoProducto;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFecha;
-        private System.Windows.Forms.TextBox txtCodVenta;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.Label lbMensaje;

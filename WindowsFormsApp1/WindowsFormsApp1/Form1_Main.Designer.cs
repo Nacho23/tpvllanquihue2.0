@@ -52,6 +52,8 @@
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnInicio = new System.Windows.Forms.PictureBox();
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btnRegistroVentas = new System.Windows.Forms.Button();
             this.BarraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -132,6 +134,8 @@
             // MenuVertical
             // 
             this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.MenuVertical.Controls.Add(this.panel6);
+            this.MenuVertical.Controls.Add(this.btnRegistroVentas);
             this.MenuVertical.Controls.Add(this.btnPerfil);
             this.MenuVertical.Controls.Add(this.label1);
             this.MenuVertical.Controls.Add(this.lbRut);
@@ -157,12 +161,13 @@
             // btnPerfil
             // 
             this.btnPerfil.ActiveLinkColor = System.Drawing.Color.SteelBlue;
+            this.btnPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPerfil.AutoSize = true;
             this.btnPerfil.LinkColor = System.Drawing.Color.LightGray;
             this.btnPerfil.Location = new System.Drawing.Point(94, 733);
             this.btnPerfil.Name = "btnPerfil";
             this.btnPerfil.Size = new System.Drawing.Size(81, 17);
-            this.btnPerfil.TabIndex = 14;
+            this.btnPerfil.TabIndex = 15;
             this.btnPerfil.TabStop = true;
             this.btnPerfil.Text = "Editar Perfil";
             this.btnPerfil.VisitedLinkColor = System.Drawing.Color.LightGray;
@@ -177,7 +182,7 @@
             this.label1.Location = new System.Drawing.Point(94, 657);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 19);
-            this.label1.TabIndex = 13;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Bienvenido/a";
             // 
             // lbRut
@@ -189,7 +194,7 @@
             this.lbRut.Location = new System.Drawing.Point(93, 676);
             this.lbRut.Name = "lbRut";
             this.lbRut.Size = new System.Drawing.Size(86, 30);
-            this.lbRut.TabIndex = 12;
+            this.lbRut.TabIndex = 98;
             this.lbRut.Text = "label1";
             // 
             // lbName
@@ -201,7 +206,7 @@
             this.lbName.Location = new System.Drawing.Point(94, 706);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(60, 21);
-            this.lbName.TabIndex = 11;
+            this.lbName.TabIndex = 97;
             this.lbName.Text = "label1";
             // 
             // panel5
@@ -246,7 +251,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel4.Location = new System.Drawing.Point(0, 341);
+            this.panel4.Location = new System.Drawing.Point(0, 386);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(5, 32);
             this.panel4.TabIndex = 6;
@@ -261,10 +266,10 @@
             this.btnReportes.ForeColor = System.Drawing.Color.White;
             this.btnReportes.Image = ((System.Drawing.Image)(resources.GetObject("btnReportes.Image")));
             this.btnReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReportes.Location = new System.Drawing.Point(3, 341);
+            this.btnReportes.Location = new System.Drawing.Point(3, 386);
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.Size = new System.Drawing.Size(267, 32);
-            this.btnReportes.TabIndex = 7;
+            this.btnReportes.TabIndex = 14;
             this.btnReportes.Text = "Reportes";
             this.btnReportes.UseVisualStyleBackColor = true;
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
@@ -272,7 +277,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel3.Location = new System.Drawing.Point(0, 292);
+            this.panel3.Location = new System.Drawing.Point(0, 337);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 32);
             this.panel3.TabIndex = 4;
@@ -287,10 +292,10 @@
             this.btnCompras.ForeColor = System.Drawing.Color.White;
             this.btnCompras.Image = ((System.Drawing.Image)(resources.GetObject("btnCompras.Image")));
             this.btnCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCompras.Location = new System.Drawing.Point(3, 292);
+            this.btnCompras.Location = new System.Drawing.Point(3, 337);
             this.btnCompras.Name = "btnCompras";
             this.btnCompras.Size = new System.Drawing.Size(267, 32);
-            this.btnCompras.TabIndex = 5;
+            this.btnCompras.TabIndex = 13;
             this.btnCompras.Text = "   Proveedores";
             this.btnCompras.UseVisualStyleBackColor = true;
             this.btnCompras.Click += new System.EventHandler(this.btnCompras_Click);
@@ -298,7 +303,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel2.Location = new System.Drawing.Point(0, 245);
+            this.panel2.Location = new System.Drawing.Point(0, 198);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(5, 32);
             this.panel2.TabIndex = 2;
@@ -313,18 +318,18 @@
             this.btnVentas.ForeColor = System.Drawing.Color.White;
             this.btnVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnVentas.Image")));
             this.btnVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVentas.Location = new System.Drawing.Point(3, 245);
+            this.btnVentas.Location = new System.Drawing.Point(3, 198);
             this.btnVentas.Name = "btnVentas";
             this.btnVentas.Size = new System.Drawing.Size(267, 32);
-            this.btnVentas.TabIndex = 3;
-            this.btnVentas.Text = "Ventas";
+            this.btnVentas.TabIndex = 12;
+            this.btnVentas.Text = "    Punto de Venta";
             this.btnVentas.UseVisualStyleBackColor = true;
             this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel1.Location = new System.Drawing.Point(0, 198);
+            this.panel1.Location = new System.Drawing.Point(0, 288);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(5, 32);
             this.panel1.TabIndex = 0;
@@ -339,10 +344,10 @@
             this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Image = ((System.Drawing.Image)(resources.GetObject("btnProductos.Image")));
             this.btnProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProductos.Location = new System.Drawing.Point(3, 198);
+            this.btnProductos.Location = new System.Drawing.Point(3, 288);
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Size = new System.Drawing.Size(267, 32);
-            this.btnProductos.TabIndex = 1;
+            this.btnProductos.TabIndex = 11;
             this.btnProductos.Text = "Productos";
             this.btnProductos.UseVisualStyleBackColor = true;
             this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
@@ -367,6 +372,32 @@
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Size = new System.Drawing.Size(1672, 762);
             this.panelContenedor.TabIndex = 2;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel6.Location = new System.Drawing.Point(0, 243);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(5, 32);
+            this.panel6.TabIndex = 100;
+            // 
+            // btnRegistroVentas
+            // 
+            this.btnRegistroVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistroVentas.FlatAppearance.BorderSize = 0;
+            this.btnRegistroVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnRegistroVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistroVentas.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistroVentas.ForeColor = System.Drawing.Color.White;
+            this.btnRegistroVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroVentas.Image")));
+            this.btnRegistroVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistroVentas.Location = new System.Drawing.Point(3, 243);
+            this.btnRegistroVentas.Name = "btnRegistroVentas";
+            this.btnRegistroVentas.Size = new System.Drawing.Size(267, 32);
+            this.btnRegistroVentas.TabIndex = 101;
+            this.btnRegistroVentas.Text = "Ventas";
+            this.btnRegistroVentas.UseVisualStyleBackColor = true;
+            this.btnRegistroVentas.Click += new System.EventHandler(this.btnRegistroVentas_Click);
             // 
             // Form1_Main
             // 
@@ -418,6 +449,8 @@
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel btnPerfil;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnRegistroVentas;
     }
 }
 

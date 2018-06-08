@@ -149,11 +149,18 @@ namespace WindowsFormsApp1
                     lbMensaje.Visible = true;
                 }
             }
+            txtIngresoProducto.Focus();
         }
 
         private void Ventas_Load(object sender, EventArgs e)
         {
             txtFecha.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            //num_ventas();
+        }
+
+        /*
+        private void num_ventas()
+        {
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
                 mysqlcon.Open();
@@ -167,9 +174,11 @@ namespace WindowsFormsApp1
                 mysqlcon.Close();
             }
         }
+        */
 
         public void inicializaTabla()
         {
+            //num_ventas();
 
             DataTable dataTableProductos = new DataTable();
 
@@ -290,58 +299,91 @@ namespace WindowsFormsApp1
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            string totalVenta = lbTotal.Text;
-            Form_Importe form_Importe = new Form_Importe(totalVenta);
-            form_Importe.Show();
-
-            string fechaAct = txtFecha.Text.Substring(6,4) + txtFecha.Text.Substring(3,2) + txtFecha.Text.Substring(0,2);
-            Console.WriteLine(fechaAct);
-
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            if (dgvVenta.Rows.Count != 0)
             {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("insertVenta", mysqlcon);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.Parameters.AddWithValue("_id", txtCodVenta.Text);
-                mysqlcmd.Parameters.AddWithValue("_fecha", fechaAct);
-                mysqlcmd.Parameters.AddWithValue("_rut_empleado", rut);
-                mysqlcmd.Parameters.AddWithValue("_total_venta", lbTotal.Text);
-                mysqlcmd.ExecuteNonQuery();
-                mysqlcon.Close();
+                string totalVenta = lbTotal.Text;
+                Form_Importe form_Importe = new Form_Importe(totalVenta);
+                form_Importe.Show();
 
-                for (int i = 0; i < listaVentas.Count; i++)
+                string fechaAct = txtFecha.Text.Substring(6, 4) + txtFecha.Text.Substring(3, 2) + txtFecha.Text.Substring(0, 2);
+
+                using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
                 {
                     mysqlcon.Open();
-                    MySqlCommand mysqlcmd2 = new MySqlCommand("insertVentaProducto", mysqlcon);
-                    mysqlcmd2.CommandType = CommandType.StoredProcedure;
-                    mysqlcmd2.Parameters.AddWithValue("_id_venta", txtCodVenta.Text);
-                    mysqlcmd2.Parameters.AddWithValue("_codigo_producto", listaVentas[i].Codigo);
-                    mysqlcmd2.Parameters.AddWithValue("_cantidad", listaVentas[i].Cantidad);
-                    mysqlcmd2.ExecuteNonQuery();
+                    MySqlCommand mysqlcmd = new MySqlCommand("insertVenta", mysqlcon);
+                    mysqlcmd.CommandType = CommandType.StoredProcedure;
+                    //mysqlcmd.Parameters.AddWithValue("_id", txtCodVenta.Text);
+                    mysqlcmd.Parameters.AddWithValue("_fecha", fechaAct);
+                    mysqlcmd.Parameters.AddWithValue("_rut_empleado", rut);
+                    //mysqlcmd.Parameters.AddWithValue("_total_venta", lbTotal.Text);
+                    mysqlcmd.ExecuteNonQuery();
                     mysqlcon.Close();
 
-                    mysqlcon.Open();
-                    MySqlCommand mysqlcmd3 = new MySqlCommand("addGanancia", mysqlcon);
-                    mysqlcmd3.CommandType = CommandType.StoredProcedure;
-                    mysqlcmd3.Parameters.AddWithValue("_codigo", Convert.ToInt32(listaVentas[i].Codigo));
-                    mysqlcmd3.Parameters.AddWithValue("_id_venta", Convert.ToInt32(txtCodVenta.Text));
-                    mysqlcmd3.Parameters.AddWithValue("_proveedor", txtProveedor.Text);
-                    mysqlcmd3.Parameters.AddWithValue("_precio", Convert.ToInt32(listaVentas[i].Cantidad * listaVentas[i].Precio));
-                    mysqlcmd3.Parameters.AddWithValue("_fecha", fechaAct);
-                    mysqlcmd3.ExecuteNonQuery();
-                    mysqlcon.Close();
+                    int _id_venta = 0;
 
                     mysqlcon.Open();
-                    MySqlCommand mysqlcmd4 = new MySqlCommand("deductCantidad", mysqlcon);
-                    mysqlcmd4.CommandType = CommandType.StoredProcedure;
-                    mysqlcmd4.Parameters.AddWithValue("_codigo", listaVentas[i].Codigo);
-                    mysqlcmd4.Parameters.AddWithValue("_cantidadReducir", listaVentas[i].Cantidad);
-                    mysqlcmd4.ExecuteNonQuery();
-                    mysqlcon.Close();
+                    MySqlCommand mysqlcmd5 = new MySqlCommand("getMaxIdVentas", mysqlcon);
+                    mysqlcmd5.CommandType = CommandType.StoredProcedure;
+                    MySqlDataReader result5 = mysqlcmd5.ExecuteReader();
+                    if (result5.Read())
+                    {
+                        if (result5.IsDBNull(0))
+                        {
+                            MessageBox.Show("No existe registro en la BD");
+                        }
+                        else
+                        {                            
+                            Console.WriteLine(result5.GetInt32(0));
+                          
+                            _id_venta = result5.GetInt32(0);
+                            Console.WriteLine(_id_venta);
+
+                            mysqlcon.Close();
+
+                            for (int i = 0; i < listaVentas.Count; i++)
+                            {
+                                mysqlcon.Open();
+                                MySqlCommand mysqlcmd2 = new MySqlCommand("insertVentaProducto", mysqlcon);
+                                mysqlcmd2.CommandType = CommandType.StoredProcedure;
+                                mysqlcmd2.Parameters.AddWithValue("_id_venta", _id_venta);
+                                mysqlcmd2.Parameters.AddWithValue("_codigo_producto", listaVentas[i].Codigo);
+                                mysqlcmd2.Parameters.AddWithValue("_cantidad", listaVentas[i].Cantidad);
+                                mysqlcmd2.ExecuteNonQuery();
+                                mysqlcon.Close();
+
+                                mysqlcon.Open();
+                                MySqlCommand mysqlcmd3 = new MySqlCommand("addGanancia", mysqlcon);
+                                mysqlcmd3.CommandType = CommandType.StoredProcedure;
+                                mysqlcmd3.Parameters.AddWithValue("_codigo", Convert.ToInt32(listaVentas[i].Codigo));
+                                mysqlcmd3.Parameters.AddWithValue("_id_venta", _id_venta);
+                                mysqlcmd3.Parameters.AddWithValue("_proveedor", txtProveedor.Text);
+                                mysqlcmd3.Parameters.AddWithValue("_precio", Convert.ToInt32(listaVentas[i].Cantidad * listaVentas[i].Precio));
+                                mysqlcmd3.Parameters.AddWithValue("_fecha", fechaAct);
+                                mysqlcmd3.ExecuteNonQuery();
+                                mysqlcon.Close();
+
+                                mysqlcon.Open();
+                                MySqlCommand mysqlcmd4 = new MySqlCommand("deductCantidad", mysqlcon);
+                                mysqlcmd4.CommandType = CommandType.StoredProcedure;
+                                mysqlcmd4.Parameters.AddWithValue("_codigo", listaVentas[i].Codigo);
+                                mysqlcmd4.Parameters.AddWithValue("_cantidadReducir", listaVentas[i].Cantidad);
+                                mysqlcmd4.ExecuteNonQuery();
+                                mysqlcon.Close();
+                            }
+                            mysqlcon.Close();
+
+                            clear();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en la consulta a la BD");
+                    }
                 }
-                mysqlcon.Close();
-
-                clear();
+            }
+            else
+            {
+                MessageBox.Show("Agregue algun producto para poder realizar la venta");
             }
         }
 
@@ -350,7 +392,6 @@ namespace WindowsFormsApp1
             listaVentas.Clear();
             txtCantidad.Text = "1";
             txtCategoria.Text = "";
-            txtCodVenta.Text = "";
             txtDescripcion.Text = "";
             txtIngresoProducto.Text = "Buscar Producto";
             txtIngresoProducto.ForeColor = Color.DimGray;

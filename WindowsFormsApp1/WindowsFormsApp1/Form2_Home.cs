@@ -37,8 +37,15 @@ namespace WindowsFormsApp1
                 MySqlDataReader result = mysqlcmd.ExecuteReader();
                 if (result.Read())
                 {
-                    lbProveedores.Text = result.GetInt32(0).ToString();
-                }
+                    if (result.IsDBNull(0))
+                    {
+                        lbProveedores.Text = "0";
+                    }
+                    else
+                    {
+                        lbProveedores.Text = result.GetInt32(0).ToString();
+                    }
+                } 
                 mysqlcon.Close();
 
                 mysqlcon.Open();
@@ -47,8 +54,16 @@ namespace WindowsFormsApp1
                 MySqlDataReader resultPr = mysqlcmdPr.ExecuteReader();
                 if (resultPr.Read())
                 {
-                    lbProductos.Text = resultPr.GetInt32(0).ToString();
+                    if (resultPr.IsDBNull(0))
+                    {
+                        lbProductos.Text = "0";
+                    }
+                    else
+                    {
+                        lbProductos.Text = resultPr.GetInt32(0).ToString();
+                    }
                 }
+                
                 mysqlcon.Close();
 
                 mysqlcon.Open();
@@ -57,23 +72,42 @@ namespace WindowsFormsApp1
                 MySqlDataReader resultV = mysqlcmdV.ExecuteReader();
                 if (resultV.Read())
                 {
-                    lbVentas.Text = resultV.GetInt32(0).ToString();
+                    if (resultV.IsDBNull(0))
+                    {
+                        lbVentas.Text = "0";
+                    }
+                    else
+                    {
+                        lbVentas.Text = resultV.GetInt32(0).ToString();
+                    }
                 }
+                
                 mysqlcon.Close();
 
 
                 string mes = DateTime.Now.ToString("MM");
                 Console.WriteLine(mes);
                 mysqlcon.Open();
-                MySqlCommand mysqlcmdI = new MySqlCommand("getIngresosMes", mysqlcon);
+                MySqlCommand mysqlcmdI = new MySqlCommand("getGananciaMes", mysqlcon);
                 mysqlcmdI.CommandType = CommandType.StoredProcedure;
+                mysqlcmdI.Parameters.AddWithValue("_solicitud", "ingreso");
                 mysqlcmdI.Parameters.AddWithValue("_mes", mes);
+                mysqlcmdI.Parameters.AddWithValue("_dia", "");
+                mysqlcmdI.Parameters.AddWithValue("_proveedor", "");
                 MySqlDataReader resultI = mysqlcmdI.ExecuteReader();
                 if (resultI.Read())
                 {
-                    CultureInfo cl = new CultureInfo("es-CL");
-                    lbIngresos.Text = resultI.GetInt32(0).ToString("C", cl);
+                    if (resultI.IsDBNull(0))
+                    {
+                        lbIngresos.Text = "0";
+                    }
+                    else
+                    {
+                        CultureInfo cl = new CultureInfo("es-CL");
+                        lbIngresos.Text = resultI.GetInt32(0).ToString("C", cl);
+                    }
                 }
+                
                 mysqlcon.Close();
             }
 
