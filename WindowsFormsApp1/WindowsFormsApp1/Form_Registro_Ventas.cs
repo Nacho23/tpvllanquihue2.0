@@ -144,5 +144,22 @@ namespace WindowsFormsApp1
                 txtBuscarVenta.Focus();
             }*/
         }
+
+        Bitmap bmp;
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            int alto = dgvRegistroVentas.Height;
+            dgvRegistroVentas.Height = dgvRegistroVentas.RowCount * dgvRegistroVentas.RowTemplate.Height * 2;
+            bmp = new Bitmap(dgvRegistroVentas.Width, dgvRegistroVentas.Height);
+            dgvRegistroVentas.DrawToBitmap(bmp, new Rectangle(0, 0, dgvRegistroVentas.Width, dgvRegistroVentas.Height));
+            dgvRegistroVentas.Height = alto;
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(bmp, 0, 0);
+        }
     }
 }
