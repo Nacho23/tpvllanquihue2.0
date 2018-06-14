@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -56,6 +57,12 @@
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.lbMensaje = new System.Windows.Forms.Label();
             this.btnDisminuirCantidad = new System.Windows.Forms.Button();
+            this.tootipHistorialVentas = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxPorPagar = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCliente = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblMsgClient = new System.Windows.Forms.Label();
             this.panelPropiedades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +70,11 @@
             // panelPropiedades
             // 
             this.panelPropiedades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(102)))));
+            this.panelPropiedades.Controls.Add(this.lblMsgClient);
+            this.panelPropiedades.Controls.Add(this.label13);
+            this.panelPropiedades.Controls.Add(this.txtCliente);
+            this.panelPropiedades.Controls.Add(this.label10);
+            this.panelPropiedades.Controls.Add(this.checkBoxPorPagar);
             this.panelPropiedades.Controls.Add(this.label12);
             this.panelPropiedades.Controls.Add(this.label8);
             this.panelPropiedades.Controls.Add(this.label7);
@@ -114,7 +126,7 @@
             this.label7.ForeColor = System.Drawing.Color.Goldenrod;
             this.label7.Location = new System.Drawing.Point(127, 47);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 55);
+            this.label7.Size = new System.Drawing.Size(47, 52);
             this.label7.TabIndex = 25;
             this.label7.Text = "$";
             // 
@@ -397,6 +409,62 @@
             this.btnDisminuirCantidad.UseVisualStyleBackColor = true;
             this.btnDisminuirCantidad.Click += new System.EventHandler(this.btnDisminuirCantidad_Click);
             // 
+            // checkBoxPorPagar
+            // 
+            this.checkBoxPorPagar.AutoSize = true;
+            this.checkBoxPorPagar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxPorPagar.Location = new System.Drawing.Point(196, 470);
+            this.checkBoxPorPagar.Name = "checkBoxPorPagar";
+            this.checkBoxPorPagar.Size = new System.Drawing.Size(18, 17);
+            this.checkBoxPorPagar.TabIndex = 28;
+            this.checkBoxPorPagar.UseVisualStyleBackColor = true;
+            this.checkBoxPorPagar.CheckedChanged += new System.EventHandler(this.checkBoxPorPagar_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(15, 468);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(125, 22);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "POR PAGAR";
+            // 
+            // txtCliente
+            // 
+            this.txtCliente.BackColor = System.Drawing.Color.Gainsboro;
+            this.txtCliente.Enabled = false;
+            this.txtCliente.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCliente.Location = new System.Drawing.Point(196, 499);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.Size = new System.Drawing.Size(226, 30);
+            this.txtCliente.TabIndex = 30;
+            this.txtCliente.Leave += new System.EventHandler(this.txtCliente_Leave);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(15, 502);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(81, 22);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "CLIENTE";
+            // 
+            // lblMsgClient
+            // 
+            this.lblMsgClient.AutoSize = true;
+            this.lblMsgClient.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsgClient.ForeColor = System.Drawing.Color.Goldenrod;
+            this.lblMsgClient.Location = new System.Drawing.Point(183, 532);
+            this.lblMsgClient.Name = "lblMsgClient";
+            this.lblMsgClient.Size = new System.Drawing.Size(69, 21);
+            this.lblMsgClient.TabIndex = 32;
+            this.lblMsgClient.Text = "label14";
+            this.lblMsgClient.Visible = false;
+            // 
             // Ventas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -451,5 +519,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbTotal;
+        private System.Windows.Forms.ToolTip tootipHistorialVentas;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtCliente;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox checkBoxPorPagar;
+        private System.Windows.Forms.Label lblMsgClient;
     }
 }

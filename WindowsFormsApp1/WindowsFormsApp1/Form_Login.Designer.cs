@@ -237,7 +237,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.Name = "Form_Login";
-            this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Login";
             this.Load += new System.EventHandler(this.Form_Login_Load);

@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
             Application.Exit();
         }
 
-        private void abrirFormularioHijo(object formuHijo)
+        public void abrirFormularioHijo(object formuHijo)
         {
             if(this.panelContenedor.Controls.Count > 0)
                 this.panelContenedor.Controls.RemoveAt(0);

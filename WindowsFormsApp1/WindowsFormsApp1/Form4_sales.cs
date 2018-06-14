@@ -398,6 +398,7 @@ namespace WindowsFormsApp1
             txtPrecio.Text = "";
             txtProveedor.Text = "";
             lbMensaje.Text = "";
+            lblMsgClient.Text = "";
             inicializaTabla();
         }
 
@@ -405,6 +406,48 @@ namespace WindowsFormsApp1
         {
             listaVentas.RemoveAt(dgvVenta.CurrentRow.Index);
             inicializaTabla();
+        }
+
+        private void checkBoxPorPagar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPorPagar.Checked)
+            {
+                lblMsgClient.Text = "";
+                txtCliente.Enabled = true;
+                txtCliente.BackColor = Color.White;
+                txtCliente.Focus();
+            }
+            else
+            {
+                txtCliente.Enabled = false;
+                lblMsgClient.Text = "";
+                txtCliente.BackColor = Color.Gainsboro;
+            }
+        }
+
+        private void txtCliente_Leave(object sender, EventArgs e)
+        {
+            if (checkBoxPorPagar.Checked)
+            {
+                if(txtCliente.Text.Trim() == "")
+                {
+                    lblMsgClient.Visible = true;
+                    lblMsgClient.Text = "Tiene que ingresar un cliente";
+                    txtCliente.Focus();
+                }
+                else
+                {
+                    //VALIDAR CLIENTE(RUT)
+                    /*if (isTrue)
+                    {
+                        //ALMACENAR RUT PARA SER GUARDADO
+                    }
+                    else
+                    {
+                        //DAR LA OPCION DE REGISTRAR AL CLIENTE
+                    }*/
+                }
+            }
         }
     }
 
