@@ -151,5 +151,17 @@ namespace WindowsFormsApp1
         {
             btnModDatos.Enabled = true;
         }
+
+        private void btnUltimosIngresos_Click(object sender, EventArgs e)
+        {
+            Form_tables form_Tables = new Form_tables("Ingresos");
+            form_Tables.ShowDialog();
+        }
+
+        private void btnUltimasModificaciones_Click(object sender, EventArgs e)
+        {
+            Form_tables form_Tables = new Form_tables("Modificaciones");
+            form_Tables.ShowDialog();
+        }
     }
 }

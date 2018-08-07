@@ -48,9 +48,11 @@
             this.lbMensaje = new System.Windows.Forms.Label();
             this.btnModDatos = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.btnUltimosIngresos = new System.Windows.Forms.Button();
+            this.btnUltimasModificaciones = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -281,15 +283,15 @@
             this.shapeContainer1.TabIndex = 15;
             this.shapeContainer1.TabStop = false;
             // 
-            // lineShape1
+            // lineShape3
             // 
-            this.lineShape1.BorderColor = System.Drawing.Color.DimGray;
-            this.lineShape1.Enabled = false;
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 276;
-            this.lineShape1.X2 = 588;
-            this.lineShape1.Y1 = 295;
-            this.lineShape1.Y2 = 295;
+            this.lineShape3.BorderColor = System.Drawing.Color.DimGray;
+            this.lineShape3.Enabled = false;
+            this.lineShape3.Name = "lineShape3";
+            this.lineShape3.X1 = 276;
+            this.lineShape3.X2 = 588;
+            this.lineShape3.Y1 = 382;
+            this.lineShape3.Y2 = 382;
             // 
             // lineShape2
             // 
@@ -301,15 +303,43 @@
             this.lineShape2.Y1 = 337;
             this.lineShape2.Y2 = 337;
             // 
-            // lineShape3
+            // lineShape1
             // 
-            this.lineShape3.BorderColor = System.Drawing.Color.DimGray;
-            this.lineShape3.Enabled = false;
-            this.lineShape3.Name = "lineShape3";
-            this.lineShape3.X1 = 276;
-            this.lineShape3.X2 = 588;
-            this.lineShape3.Y1 = 382;
-            this.lineShape3.Y2 = 382;
+            this.lineShape1.BorderColor = System.Drawing.Color.DimGray;
+            this.lineShape1.Enabled = false;
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 276;
+            this.lineShape1.X2 = 588;
+            this.lineShape1.Y1 = 295;
+            this.lineShape1.Y2 = 295;
+            // 
+            // btnUltimosIngresos
+            // 
+            this.btnUltimosIngresos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUltimosIngresos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUltimosIngresos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUltimosIngresos.ForeColor = System.Drawing.Color.White;
+            this.btnUltimosIngresos.Location = new System.Drawing.Point(732, 66);
+            this.btnUltimosIngresos.Name = "btnUltimosIngresos";
+            this.btnUltimosIngresos.Size = new System.Drawing.Size(345, 52);
+            this.btnUltimosIngresos.TabIndex = 16;
+            this.btnUltimosIngresos.Text = "Últimos Ingresos";
+            this.btnUltimosIngresos.UseVisualStyleBackColor = true;
+            this.btnUltimosIngresos.Click += new System.EventHandler(this.btnUltimosIngresos_Click);
+            // 
+            // btnUltimasModificaciones
+            // 
+            this.btnUltimasModificaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUltimasModificaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUltimasModificaciones.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUltimasModificaciones.ForeColor = System.Drawing.Color.White;
+            this.btnUltimasModificaciones.Location = new System.Drawing.Point(732, 122);
+            this.btnUltimasModificaciones.Name = "btnUltimasModificaciones";
+            this.btnUltimasModificaciones.Size = new System.Drawing.Size(345, 52);
+            this.btnUltimasModificaciones.TabIndex = 17;
+            this.btnUltimasModificaciones.Text = "Últimas Modificaciones";
+            this.btnUltimasModificaciones.UseVisualStyleBackColor = true;
+            this.btnUltimasModificaciones.Click += new System.EventHandler(this.btnUltimasModificaciones_Click);
             // 
             // Perfil
             // 
@@ -317,6 +347,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1080, 612);
+            this.Controls.Add(this.btnUltimasModificaciones);
+            this.Controls.Add(this.btnUltimosIngresos);
             this.Controls.Add(this.btnModDatos);
             this.Controls.Add(this.lbMensaje);
             this.Controls.Add(this.btnCambiarContrasena);
@@ -370,5 +402,7 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private System.Windows.Forms.Button btnUltimosIngresos;
+        private System.Windows.Forms.Button btnUltimasModificaciones;
     }
 }

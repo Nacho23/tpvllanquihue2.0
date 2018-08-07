@@ -57,3 +57,4 @@ C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\o
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Cliente.resources
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_AddClient.resources
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_Abonar.resources
+C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_tables.resources

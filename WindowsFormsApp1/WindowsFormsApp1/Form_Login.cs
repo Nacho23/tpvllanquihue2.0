@@ -14,6 +14,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form_Login : Form
     {
+        string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none";
+
         public Form_Login()
         {
             InitializeComponent();
@@ -100,14 +102,12 @@ namespace WindowsFormsApp1
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none";
 
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
                 try
                 {
                     mysqlcon.Open();
-
 
                     MySqlCommand mysqlcmd = new MySqlCommand("login", mysqlcon);
                     mysqlcmd.CommandType = CommandType.StoredProcedure;
@@ -117,6 +117,7 @@ namespace WindowsFormsApp1
                     if (result.Read())
                     {
                         this.Hide();
+                        registerIn();
                         Form1_Main form1_Main = new Form1_Main(txtUsuario.Text);
                         form1_Main.Show();
                     }
@@ -136,6 +137,21 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Error al conectar con la Base de Datos. Si el error persiste, contacte a soporte (tel: 965002727)");
 
                 }
+            }
+        }
+
+        private void registerIn()
+        {
+            string fechaAct = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            {
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("registerIn", mysqlcon);
+                mysqlcmd.Parameters.AddWithValue("_rut", txtUsuario.Text);
+                mysqlcmd.Parameters.AddWithValue("_fecha", fechaAct);
+                mysqlcmd.CommandType = CommandType.StoredProcedure;
+                mysqlcmd.ExecuteNonQuery();
             }
         }
 
