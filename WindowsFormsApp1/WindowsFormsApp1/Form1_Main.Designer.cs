@@ -35,6 +35,7 @@
             this.btnMaximizar = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.MenuVertical = new System.Windows.Forms.Panel();
+            this.btnRegistroVentas = new System.Windows.Forms.Button();
             this.btnPerfil = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lbRut = new System.Windows.Forms.Label();
@@ -53,7 +54,7 @@
             this.btnInicio = new System.Windows.Forms.PictureBox();
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.btnRegistroVentas = new System.Windows.Forms.Button();
+            this.btnClients = new System.Windows.Forms.Button();
             this.BarraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
@@ -135,6 +136,7 @@
             // 
             this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
             this.MenuVertical.Controls.Add(this.panel6);
+            this.MenuVertical.Controls.Add(this.btnClients);
             this.MenuVertical.Controls.Add(this.btnRegistroVentas);
             this.MenuVertical.Controls.Add(this.btnPerfil);
             this.MenuVertical.Controls.Add(this.label1);
@@ -157,6 +159,25 @@
             this.MenuVertical.Name = "MenuVertical";
             this.MenuVertical.Size = new System.Drawing.Size(270, 762);
             this.MenuVertical.TabIndex = 1;
+            // 
+            // btnRegistroVentas
+            // 
+            this.btnRegistroVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistroVentas.FlatAppearance.BorderSize = 0;
+            this.btnRegistroVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnRegistroVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistroVentas.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistroVentas.ForeColor = System.Drawing.Color.White;
+            this.btnRegistroVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroVentas.Image")));
+            this.btnRegistroVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistroVentas.Location = new System.Drawing.Point(32, 243);
+            this.btnRegistroVentas.Name = "btnRegistroVentas";
+            this.btnRegistroVentas.Size = new System.Drawing.Size(238, 32);
+            this.btnRegistroVentas.TabIndex = 101;
+            this.btnRegistroVentas.Text = "             Historial de Ventas";
+            this.btnRegistroVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistroVentas.UseVisualStyleBackColor = true;
+            this.btnRegistroVentas.Click += new System.EventHandler(this.btnRegistroVentas_Click);
             // 
             // btnPerfil
             // 
@@ -227,11 +248,12 @@
             this.btnInicio2.ForeColor = System.Drawing.Color.White;
             this.btnInicio2.Image = ((System.Drawing.Image)(resources.GetObject("btnInicio2.Image")));
             this.btnInicio2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInicio2.Location = new System.Drawing.Point(3, 151);
+            this.btnInicio2.Location = new System.Drawing.Point(3, 150);
             this.btnInicio2.Name = "btnInicio2";
             this.btnInicio2.Size = new System.Drawing.Size(267, 32);
             this.btnInicio2.TabIndex = 10;
-            this.btnInicio2.Text = "Inicio";
+            this.btnInicio2.Text = "            Inicio";
+            this.btnInicio2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnInicio2.UseVisualStyleBackColor = true;
             this.btnInicio2.Click += new System.EventHandler(this.btnInicio2_Click);
             // 
@@ -251,7 +273,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel4.Location = new System.Drawing.Point(0, 386);
+            this.panel4.Location = new System.Drawing.Point(0, 440);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(5, 32);
             this.panel4.TabIndex = 6;
@@ -266,11 +288,12 @@
             this.btnReportes.ForeColor = System.Drawing.Color.White;
             this.btnReportes.Image = ((System.Drawing.Image)(resources.GetObject("btnReportes.Image")));
             this.btnReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReportes.Location = new System.Drawing.Point(3, 386);
+            this.btnReportes.Location = new System.Drawing.Point(3, 440);
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.Size = new System.Drawing.Size(267, 32);
             this.btnReportes.TabIndex = 14;
-            this.btnReportes.Text = "Reportes";
+            this.btnReportes.Text = "            Reportes";
+            this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReportes.UseVisualStyleBackColor = true;
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
@@ -296,7 +319,8 @@
             this.btnCompras.Name = "btnCompras";
             this.btnCompras.Size = new System.Drawing.Size(267, 32);
             this.btnCompras.TabIndex = 13;
-            this.btnCompras.Text = "   Proveedores";
+            this.btnCompras.Text = "            Proveedores";
+            this.btnCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCompras.UseVisualStyleBackColor = true;
             this.btnCompras.Click += new System.EventHandler(this.btnCompras_Click);
             // 
@@ -322,7 +346,8 @@
             this.btnVentas.Name = "btnVentas";
             this.btnVentas.Size = new System.Drawing.Size(267, 32);
             this.btnVentas.TabIndex = 12;
-            this.btnVentas.Text = "    Punto de Venta";
+            this.btnVentas.Text = "            Ventas";
+            this.btnVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVentas.UseVisualStyleBackColor = true;
             this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
@@ -348,7 +373,8 @@
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Size = new System.Drawing.Size(267, 32);
             this.btnProductos.TabIndex = 11;
-            this.btnProductos.Text = "Productos";
+            this.btnProductos.Text = "            Productos";
+            this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProductos.UseVisualStyleBackColor = true;
             this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
@@ -376,28 +402,29 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel6.Location = new System.Drawing.Point(0, 243);
+            this.panel6.Location = new System.Drawing.Point(0, 388);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(5, 32);
-            this.panel6.TabIndex = 100;
+            this.panel6.TabIndex = 102;
             // 
-            // btnRegistroVentas
+            // btnClients
             // 
-            this.btnRegistroVentas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegistroVentas.FlatAppearance.BorderSize = 0;
-            this.btnRegistroVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.btnRegistroVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistroVentas.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistroVentas.ForeColor = System.Drawing.Color.White;
-            this.btnRegistroVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnRegistroVentas.Image")));
-            this.btnRegistroVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegistroVentas.Location = new System.Drawing.Point(3, 243);
-            this.btnRegistroVentas.Name = "btnRegistroVentas";
-            this.btnRegistroVentas.Size = new System.Drawing.Size(267, 32);
-            this.btnRegistroVentas.TabIndex = 101;
-            this.btnRegistroVentas.Text = "Ventas";
-            this.btnRegistroVentas.UseVisualStyleBackColor = true;
-            this.btnRegistroVentas.Click += new System.EventHandler(this.btnRegistroVentas_Click);
+            this.btnClients.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClients.FlatAppearance.BorderSize = 0;
+            this.btnClients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClients.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClients.ForeColor = System.Drawing.Color.White;
+            this.btnClients.Image = ((System.Drawing.Image)(resources.GetObject("btnClients.Image")));
+            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClients.Location = new System.Drawing.Point(3, 388);
+            this.btnClients.Name = "btnClients";
+            this.btnClients.Size = new System.Drawing.Size(267, 32);
+            this.btnClients.TabIndex = 103;
+            this.btnClients.Text = "            Clientes";
+            this.btnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClients.UseVisualStyleBackColor = true;
+            this.btnClients.Click += new System.EventHandler(this.btnClients_Click);
             // 
             // Form1_Main
             // 
@@ -449,8 +476,9 @@
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel btnPerfil;
-        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnRegistroVentas;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnClients;
     }
 }
 

@@ -54,3 +54,6 @@ C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\o
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.ResolveComReference.cache
 C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_Registro_Ventas.resources
+C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Cliente.resources
+C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_AddClient.resources
+C:\Users\naxo_\Source\Repos\tpvllanquihue2.0\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form_Abonar.resources

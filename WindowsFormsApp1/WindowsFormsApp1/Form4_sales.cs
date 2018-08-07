@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -154,7 +155,9 @@ namespace WindowsFormsApp1
 
         private void Ventas_Load(object sender, EventArgs e)
         {
-            txtFecha.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            string fecha = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+            txtFecha.Text = fecha.Substring(0, 2) + "-" + fecha.Substring(3, 2) + "-" + fecha.Substring(6, 4);
+            Console.WriteLine(txtFecha.Text);
             //num_ventas();
         }
 
@@ -297,7 +300,151 @@ namespace WindowsFormsApp1
             }
         }
 
+        // Funcionar al Cobrar la VENTA
         private void btnNuevo_Click(object sender, EventArgs e)
+        {       
+            if (checkBoxPorPagar.Checked)
+            {
+                if (txtCliente.Text.Trim() == "")
+                {
+                    lblMsgClient.Visible = true;
+                    lblMsgClient.Text = "Tiene que ingresar un cliente";
+                    txtCliente.Focus();
+                }
+                else
+                {
+                    bool valido = ValidaRut(txtCliente.Text);
+                    if (valido)
+                    {
+                        Console.WriteLine("Rut valido, Se puede continuar");
+                        using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+                        {
+                            mysqlcon.Open();
+                            MySqlCommand mysqlcmd = new MySqlCommand("getClientByRut", mysqlcon);
+                            mysqlcmd.CommandType = CommandType.StoredProcedure;
+                            mysqlcmd.Parameters.AddWithValue("_rut", txtCliente.Text);
+                            MySqlDataReader result = mysqlcmd.ExecuteReader();
+                            if (result.Read())
+                            {
+                                lblMsgClient.Text = "";
+                                Console.WriteLine("ALMACENA LA VENTA AL CLIENT: " + result[0].ToString());
+                                makeSale();
+                                storeDebt();
+                                addClientSale(result[0].ToString());
+                                clear();
+                            }
+                            else
+                            {
+                                lblMsgClient.Text = "No Existe el Cliente";
+                                DialogResult newClient = MessageBox.Show("No existe el cliente, ¿Desea Agregarlo?", "Agregar Nuevo Cliente",
+                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                                if (newClient.Equals(DialogResult.OK))
+                                {
+                                    Form_AddClient form_AddClient = new Form_AddClient(txtCliente.Text);
+                                    form_AddClient.ShowDialog();
+                                    //Console.WriteLine("SE CERRO");
+                                    makeSale();
+                                    storeDebt();
+                                    addClientSale(txtCliente.Text);
+                                    clear();
+                                }
+                                else
+                                {
+                                    DialogResult response = MessageBox.Show("Si no agrega el usuario, la venta se realizará como ANONIMA y PAGADA, ¿Desea Continuar?",
+                                        "Agregar Nuevo Cliente", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                                    if (response.Equals(DialogResult.OK))
+                                    {
+                                        makeSale();
+                                        Console.WriteLine("Realiza la venta (pagado)");
+                                        clear();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("No se realizó la venta");
+                                    }
+                                }
+                            }
+                            mysqlcon.Close();
+                        }
+                    }
+                    else
+                    {
+                        lblMsgClient.Text = "Rut Invalido";
+                    }
+                }
+            }
+            else
+            {
+                makeSale();
+                Console.WriteLine("Realiza la venta (pagado)");
+                clear();
+            }
+        }
+
+        private void storeDebt()
+        {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            {
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd = new MySqlCommand("setNewDebt", mysqlcon);
+                mysqlcmd.CommandType = CommandType.StoredProcedure;
+                mysqlcmd.Parameters.AddWithValue("_rut_cliente", txtCliente.Text.Trim());
+                mysqlcmd.Parameters.AddWithValue("_monto", lbTotal.Text);
+                Console.WriteLine(lbTotal.Text);
+                mysqlcmd.ExecuteNonQuery();
+                mysqlcon.Close();
+            }
+        }
+
+        //Valida rut Chileno
+        public static bool ValidaRut(string rut)
+        {
+            rut = rut.Replace(".", "").ToUpper();
+            Regex expresion = new Regex("^([0-9]+-[0-9K])$");
+            string dv = rut.Substring(rut.Length - 1, 1);
+            if (!expresion.IsMatch(rut))
+            {
+                return false;
+            }
+            char[] charCorte = { '-' };
+            string[] rutTemp = rut.Split(charCorte);
+            if (dv != Digito(int.Parse(rutTemp[0])))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        //Metodo que valida el digito verificar, de acuerdo a la mantiza del rut
+        //Es utilizado en el metodo para verificar Rut
+        public static string Digito(int rut)
+        {
+            int suma = 0;
+            int multiplicador = 1;
+            while (rut != 0)
+            {
+                multiplicador++;
+                if (multiplicador == 8)
+                    multiplicador = 2;
+                suma += (rut % 10) * multiplicador;
+                rut = rut / 10;
+            }
+            suma = 11 - (suma % 11);
+            if (suma == 11)
+            {
+                return "0";
+            }
+            else if (suma == 10)
+            {
+                return "K";
+            }
+            else
+            {
+                return suma.ToString();
+            }
+        }
+
+        private void makeSale()
         {
             if (dgvVenta.Rows.Count != 0)
             {
@@ -305,7 +452,8 @@ namespace WindowsFormsApp1
                 Form_Importe form_Importe = new Form_Importe(totalVenta);
                 form_Importe.Show();
 
-                string fechaAct = txtFecha.Text.Substring(6, 4) + txtFecha.Text.Substring(3, 2) + txtFecha.Text.Substring(0, 2);
+                //string fechaAct = txtFecha.Text.Substring(6, 4) + txtFecha.Text.Substring(3, 2) + txtFecha.Text.Substring(0, 2);
+                string fechaAct = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
 
                 using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
                 {
@@ -315,7 +463,6 @@ namespace WindowsFormsApp1
                     //mysqlcmd.Parameters.AddWithValue("_id", txtCodVenta.Text);
                     mysqlcmd.Parameters.AddWithValue("_fecha", fechaAct);
                     mysqlcmd.Parameters.AddWithValue("_rut_empleado", rut);
-                    //mysqlcmd.Parameters.AddWithValue("_total_venta", lbTotal.Text);
                     mysqlcmd.ExecuteNonQuery();
                     mysqlcon.Close();
 
@@ -332,9 +479,9 @@ namespace WindowsFormsApp1
                             MessageBox.Show("No existe registro en la BD");
                         }
                         else
-                        {                            
+                        {
                             Console.WriteLine(result5.GetInt32(0));
-                          
+
                             _id_venta = result5.GetInt32(0);
                             Console.WriteLine(_id_venta);
 
@@ -372,7 +519,6 @@ namespace WindowsFormsApp1
                             }
                             mysqlcon.Close();
 
-                            clear();
                         }
                     }
                     else
@@ -387,9 +533,48 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void addClientSale(string rut)
+        {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            {
+                int _id_venta = 0;
+
+                mysqlcon.Open();
+                MySqlCommand mysqlcmd2 = new MySqlCommand("getMaxIdVentas", mysqlcon);
+                mysqlcmd2.CommandType = CommandType.StoredProcedure;
+                MySqlDataReader result2 = mysqlcmd2.ExecuteReader();
+                if (result2.Read())
+                {
+                    if (result2.IsDBNull(0))
+                    {
+                        MessageBox.Show("No existe registro en la BD");
+                    }
+                    else
+                    {
+                        _id_venta = result2.GetInt32(0);
+                        mysqlcon.Close();
+
+                        mysqlcon.Open();
+                        MySqlCommand mysqlcmd = new MySqlCommand("insertClientSale", mysqlcon);
+                        mysqlcmd.CommandType = CommandType.StoredProcedure;
+                        mysqlcmd.Parameters.AddWithValue("_rut", rut);
+                        mysqlcmd.Parameters.AddWithValue("_id_venta", _id_venta);
+                        mysqlcmd.ExecuteNonQuery();
+
+                        mysqlcon.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error en la consulta a la BD");
+                }
+            }
+        }
+
         private void clear()
         {
             listaVentas.Clear();
+            txtCliente.Text = "";
             txtCantidad.Text = "1";
             txtCategoria.Text = "";
             txtDescripcion.Text = "";
@@ -398,6 +583,7 @@ namespace WindowsFormsApp1
             txtPrecio.Text = "";
             txtProveedor.Text = "";
             lbMensaje.Text = "";
+            lblMsgClient.Text = "";
             inicializaTabla();
         }
 
@@ -405,6 +591,28 @@ namespace WindowsFormsApp1
         {
             listaVentas.RemoveAt(dgvVenta.CurrentRow.Index);
             inicializaTabla();
+        }
+
+        private void checkBoxPorPagar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPorPagar.Checked)
+            {
+                lblMsgClient.Text = "";
+                txtCliente.Enabled = true;
+                txtCliente.BackColor = Color.White;
+                txtCliente.Focus();
+            }
+            else
+            {
+                txtCliente.Enabled = false;
+                lblMsgClient.Text = "";
+                txtCliente.BackColor = Color.Gainsboro;
+            }
+        }
+
+        private void txtCliente_Leave(object sender, EventArgs e)
+        {
+            
         }
     }
 

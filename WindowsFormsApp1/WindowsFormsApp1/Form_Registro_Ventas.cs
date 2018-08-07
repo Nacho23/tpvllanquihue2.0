@@ -88,7 +88,7 @@ namespace WindowsFormsApp1
                                         fila[0] = result2.GetString(0);
                                         fila[1] = result2.GetInt32(3).ToString("C", cl);
                                         fila[2] = result2.GetInt32(4).ToString("C", cl);
-                                        fila[3] = result2.GetString(1);
+                                        fila[3] = result2.GetDateTime(1).ToString();
                                         fila[4] = result2.GetString(2);
                                         dataTableResult.Rows.Add(fila);
                                     }
@@ -112,10 +112,10 @@ namespace WindowsFormsApp1
             if (dgvRegistroVentas.CurrentRow.Index != -1)
             {
                 txtCodVenta.Text = dgvRegistroVentas.CurrentRow.Cells[0].Value.ToString();
-                txtIngresoTotal.Text = dgvRegistroVentas.CurrentRow.Cells[3].Value.ToString();
-                txtGanancia.Text = dgvRegistroVentas.CurrentRow.Cells[4].Value.ToString();
-                txtFecha.Text = dgvRegistroVentas.CurrentRow.Cells[1].Value.ToString();
-                txtVendidaPor.Text = dgvRegistroVentas.CurrentRow.Cells[2].Value.ToString();
+                txtIngresoTotal.Text = dgvRegistroVentas.CurrentRow.Cells[1].Value.ToString();
+                txtGanancia.Text = dgvRegistroVentas.CurrentRow.Cells[2].Value.ToString();
+                txtFecha.Text = dgvRegistroVentas.CurrentRow.Cells[3].Value.ToString();
+                txtVendidaPor.Text = dgvRegistroVentas.CurrentRow.Cells[4].Value.ToString();
             }
         }
 

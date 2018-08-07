@@ -104,26 +104,38 @@ namespace WindowsFormsApp1
 
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("login", mysqlcon);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.Parameters.AddWithValue("_rut", txtUsuario.Text);
-                mysqlcmd.Parameters.AddWithValue("_contrasena", txtContrasena.Text);
-                MySqlDataReader result = mysqlcmd.ExecuteReader();
-                if (result.Read())
+                try
                 {
-                    this.Hide();
-                    Form1_Main form1_Main = new Form1_Main(txtUsuario.Text);
-                    form1_Main.Show();
-                } else
-                {
-                    lblError.Text = "Usuario o Contraseña Incorrecta";
-                    lblError.Visible = true;
-                    txtContrasena.Text = "";
-                    txtContrasena_Leave(null, e);
-                    txtUsuario.Focus();
+                    mysqlcon.Open();
+
+
+                    MySqlCommand mysqlcmd = new MySqlCommand("login", mysqlcon);
+                    mysqlcmd.CommandType = CommandType.StoredProcedure;
+                    mysqlcmd.Parameters.AddWithValue("_rut", txtUsuario.Text);
+                    mysqlcmd.Parameters.AddWithValue("_contrasena", txtContrasena.Text);
+                    MySqlDataReader result = mysqlcmd.ExecuteReader();
+                    if (result.Read())
+                    {
+                        this.Hide();
+                        Form1_Main form1_Main = new Form1_Main(txtUsuario.Text);
+                        form1_Main.Show();
+                    }
+                    else
+                    {
+                        lblError.Text = "Usuario o Contraseña Incorrecta";
+                        lblError.Visible = true;
+                        txtContrasena.Text = "";
+                        txtContrasena_Leave(null, e);
+                        txtUsuario.Focus();
+                    }
+                    mysqlcon.Close();
                 }
-                mysqlcon.Close();
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    MessageBox.Show("Error al conectar con la Base de Datos. Si el error persiste, contacte a soporte (tel: 965002727)");
+
+                }
             }
         }
 

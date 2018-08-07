@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
             Application.Exit();
         }
 
-        private void abrirFormularioHijo(object formuHijo)
+        public void abrirFormularioHijo(object formuHijo)
         {
             if(this.panelContenedor.Controls.Count > 0)
                 this.panelContenedor.Controls.RemoveAt(0);
@@ -137,6 +137,11 @@ namespace WindowsFormsApp1
         private void btnRegistroVentas_Click(object sender, EventArgs e)
         {
             abrirFormularioHijo(new Form_Registro_Ventas());
+        }
+
+        private void btnClients_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new Cliente());
         }
     }
 }
