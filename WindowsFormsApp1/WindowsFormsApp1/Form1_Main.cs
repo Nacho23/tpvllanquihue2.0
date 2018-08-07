@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Productos());
+            abrirFormularioHijo(new Productos(lbRut.Text));
         }
 
         private void btnInicio_Click(object sender, EventArgs e)
@@ -96,7 +96,7 @@ namespace WindowsFormsApp1
 
         private void btnCompras_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Compras());
+            abrirFormularioHijo(new Compras(lbRut.Text));
         }
 
         private void btnReportes_Click(object sender, EventArgs e)

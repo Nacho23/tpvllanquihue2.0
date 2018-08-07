@@ -16,10 +16,12 @@ namespace WindowsFormsApp1
     {
         string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none";
         int id = 0;
+        string rut;
 
-        public Productos()
+        public Productos(string rut)
         {
             InitializeComponent();
+            this.rut = rut;
         }
 
         private void btnGuardar_Click_1(object sender, EventArgs e)
@@ -36,6 +38,7 @@ namespace WindowsFormsApp1
                 mysqlcmd.Parameters.AddWithValue("_precio", txtPrecio.Text.Trim());
                 mysqlcmd.Parameters.AddWithValue("_stock", txtStock.Text.Trim());
                 mysqlcmd.Parameters.AddWithValue("_codigo", txtCodigo.Text.Trim());
+                mysqlcmd.Parameters.AddWithValue("_rut", this.rut);
                 mysqlcmd.ExecuteNonQuery();
                 clear();
                 MessageBox.Show("Ingresado Correctamente");
