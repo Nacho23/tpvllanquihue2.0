@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
 {
     public partial class Ventas : Form
     {
-        string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none";
+        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
         List<ProductoVenta> listaVentas = new List<ProductoVenta>();
         string rut;
 

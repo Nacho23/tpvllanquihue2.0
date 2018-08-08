@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Cliente : Form
     {
-        string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none; Convert Zero Datetime=True";
+        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
 
         public Cliente()
         {

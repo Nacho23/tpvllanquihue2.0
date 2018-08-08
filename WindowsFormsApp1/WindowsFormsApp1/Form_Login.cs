@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form_Login : Form
     {
-        string connectionString = "server = localhost; user = root; database = mydb; port = 3306; password = 1234; SslMode=none";
+        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
 
         public Form_Login()
         {
@@ -105,8 +105,8 @@ namespace WindowsFormsApp1
 
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
-                try
-                {
+               // try
+               // {
                     mysqlcon.Open();
 
                     MySqlCommand mysqlcmd = new MySqlCommand("login", mysqlcon);
@@ -130,13 +130,13 @@ namespace WindowsFormsApp1
                         txtUsuario.Focus();
                     }
                     mysqlcon.Close();
-                }
-                catch (Exception ex)
+               // }
+              /*  catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                     MessageBox.Show("Error al conectar con la Base de Datos. Si el error persiste, contacte a soporte (tel: 965002727)");
 
-                }
+                }*/
             }
         }
 
