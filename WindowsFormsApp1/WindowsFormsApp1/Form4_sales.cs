@@ -399,20 +399,27 @@ namespace WindowsFormsApp1
         //Valida rut Chileno
         public static bool ValidaRut(string rut)
         {
-            rut = rut.Replace(".", "").ToUpper();
-            Regex expresion = new Regex("^([0-9]+-[0-9K])$");
-            string dv = rut.Substring(rut.Length - 1, 1);
-            if (!expresion.IsMatch(rut))
+            if(rut.Length >= 11)
             {
                 return false;
-            }
-            char[] charCorte = { '-' };
-            string[] rutTemp = rut.Split(charCorte);
-            if (dv != Digito(int.Parse(rutTemp[0])))
+            } else
             {
-                return false;
+                rut = rut.Replace(".", "").ToUpper();
+                Regex expresion = new Regex("^([0-9]+-[0-9K])$");
+                string dv = rut.Substring(rut.Length - 1, 1);
+                if (!expresion.IsMatch(rut))
+                {
+                    return false;
+                }
+                char[] charCorte = { '-' };
+                string[] rutTemp = rut.Split(charCorte);
+                if (dv != Digito(int.Parse(rutTemp[0])))
+                {
+                    return false;
+                }
+                return true;
             }
-            return true;
+
         }
 
         //Metodo que valida el digito verificar, de acuerdo a la mantiza del rut
