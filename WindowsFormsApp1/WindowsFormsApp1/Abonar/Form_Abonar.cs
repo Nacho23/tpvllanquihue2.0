@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using WindowsFormsApp1.Abonar;
 
 namespace WindowsFormsApp1
 {
     public partial class Form_Abonar : Form
     {
         string monto, rut;
-        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-
 
         public Form_Abonar(string rut, string monto)
         {
@@ -58,18 +57,7 @@ namespace WindowsFormsApp1
 
         private void btnAbonar_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
-            {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("updateDebt", mysqlcon);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                Console.WriteLine(lblDeuda.Text);
-                mysqlcmd.Parameters.AddWithValue("_rut", this.rut);
-                mysqlcmd.Parameters.AddWithValue("_deuda", lblDeuda.Text);
-                mysqlcmd.ExecuteNonQuery();
-
-                mysqlcon.Close();
-            }
+            Controller_Abonar.updateDebt(this.rut, lblDeuda.Text);
 
             this.Hide();
         }

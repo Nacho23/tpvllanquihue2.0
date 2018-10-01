@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using WindowsFormsApp1.Login;
 
 namespace WindowsFormsApp1
 {
     public partial class Form_Login : Form
     {
-        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-
         public Form_Login()
         {
             InitializeComponent();
@@ -102,57 +101,22 @@ namespace WindowsFormsApp1
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            if(Controller_Login.loginUser(txtUsuario.Text, txtContrasena.Text))
             {
-               // try
-               // {
-                    mysqlcon.Open();
-
-                    MySqlCommand mysqlcmd = new MySqlCommand("login", mysqlcon);
-                    mysqlcmd.CommandType = CommandType.StoredProcedure;
-                    mysqlcmd.Parameters.AddWithValue("_rut", txtUsuario.Text);
-                    mysqlcmd.Parameters.AddWithValue("_contrasena", txtContrasena.Text);
-                    MySqlDataReader result = mysqlcmd.ExecuteReader();
-                    if (result.Read())
-                    {
-                        this.Hide();
-                        registerIn();
-                        Form1_Main form1_Main = new Form1_Main(txtUsuario.Text);
-                        form1_Main.Show();
-                    }
-                    else
-                    {
-                        lblError.Text = "Usuario o Contraseña Incorrecta";
-                        lblError.Visible = true;
-                        txtContrasena.Text = "";
-                        txtContrasena_Leave(null, e);
-                        txtUsuario.Focus();
-                    }
-                    mysqlcon.Close();
-               // }
-              /*  catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    MessageBox.Show("Error al conectar con la Base de Datos. Si el error persiste, contacte a soporte (tel: 965002727)");
-
-                }*/
+                this.Hide();
+                Controller_Login.registerSession(txtUsuario.Text);
+                Form1_Main form1_Main = new Form1_Main(txtUsuario.Text);
+                form1_Main.Show();
             }
-        }
-
-        private void registerIn()
-        {
-            string fechaAct = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            else
             {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("registerIn", mysqlcon);
-                mysqlcmd.Parameters.AddWithValue("_rut", txtUsuario.Text);
-                mysqlcmd.Parameters.AddWithValue("_fecha", fechaAct);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.ExecuteNonQuery();
+                lblError.Text = "Usuario o Contraseña Incorrecta";
+                lblError.Visible = true;
+                txtContrasena.Text = "";
+                txtContrasena_Leave(null, e);
+                txtUsuario.Focus();
             }
+
         }
 
         private void linkContrasena_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

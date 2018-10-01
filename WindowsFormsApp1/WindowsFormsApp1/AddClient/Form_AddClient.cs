@@ -8,41 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using WindowsFormsApp1.AddClient;
 
 namespace WindowsFormsApp1
 {
     public partial class Form_AddClient : Form
     {
-        string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
         string rut;
-        //string nombre, fecha_nac, sexo, telefono, direccion, email, observaciones = "";
 
         private void Form_AddClient_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
-            {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("getClientByRut", mysqlcon);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.Parameters.AddWithValue("_rut", txtRut.Text);
-                MySqlDataReader result = mysqlcmd.ExecuteReader();
-                if (result.Read())
-                {
-                    txtName.Text = result[1].ToString();
-                    dtpBirthdate.Text = result[2].ToString();
-                    cbSex.Text = result[3].ToString();
-                    txtPhone.Text = result[4].ToString();
-                    txtAddress.Text = result[5].ToString();
-                    txtEmail.Text = result[6].ToString();
-                    txtObservations.Text = result[7].ToString();
-                }
-                else
-                {
-                    Console.WriteLine("No carga nada");
-                }
+            string[] data = Controller_AddClient.getClientByRut(txtRut.Text);
 
-                mysqlcon.Close();
-            }
+            txtName.Text = data[0];
+            dtpBirthdate.Text = data[1];
+            cbSex.Text = data[2];
+            txtPhone.Text = data[3];
+            txtAddress.Text = data[4];
+            txtEmail.Text = data[5];
+            txtObservations.Text = data[6];
         }
 
         public Form_AddClient(string rut)
@@ -71,24 +55,15 @@ namespace WindowsFormsApp1
         {
             string fecha_mod = dtpBirthdate.Text.Substring(6, 4) + dtpBirthdate.Text.Substring(3, 2) + dtpBirthdate.Text.Substring(0, 2);
 
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
-            {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("AddOrEditClient", mysqlcon);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.Parameters.AddWithValue("_rut", txtRut.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_nombre", txtName.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_fecha_nac", fecha_mod);
-                mysqlcmd.Parameters.AddWithValue("_sexo", cbSex.Text);
-                mysqlcmd.Parameters.AddWithValue("_telefono", txtPhone.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_direccion", txtAddress.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_email", txtEmail.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_observaciones", txtObservations.Text.Trim());
-                mysqlcmd.ExecuteNonQuery();
-                MessageBox.Show("Registrado Correctamente");
-
-                mysqlcon.Close();
-            }
+            Controller_AddClient.addOrEditClient(
+                txtRut.Text.Trim(),
+                txtName.Text.Trim(),
+                fecha_mod,
+                cbSex.Text,
+                txtPhone.Text.Trim(),
+                txtAddress.Text.Trim(),
+                txtEmail.Text.Trim(),
+                txtObservations.Text.Trim());
 
             this.Close();
         }

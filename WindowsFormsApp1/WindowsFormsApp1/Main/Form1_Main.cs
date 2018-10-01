@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using WindowsFormsApp1.Main;
 
 namespace WindowsFormsApp1
 {
@@ -111,22 +112,9 @@ namespace WindowsFormsApp1
 
         private void setUserLabels(string rut)
         {
-            string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
-            {
-                mysqlcon.Open();
-                MySqlCommand mysqlcmd = new MySqlCommand("getUserByRut", mysqlcon);
-                mysqlcmd.Parameters.AddWithValue("_rut", rut);
-                mysqlcmd.CommandType = CommandType.StoredProcedure;
-                MySqlDataReader result = mysqlcmd.ExecuteReader();
-                if (result.Read())
-                {
-                    lbName.Text = result.GetString(1).ToString();
-                    lbRut.Text = result.GetString(0).ToString();
-                }
-                mysqlcon.Close();
-            }
+            string[] result = Controller_Main.getUserByRut(rut);
+            lbName.Text = result[0];
+            lbRut.Text = result[1];
         }
 
         private void btnPerfil_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

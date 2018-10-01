@@ -324,6 +324,7 @@ namespace WindowsFormsApp1
                             mysqlcmd.CommandType = CommandType.StoredProcedure;
                             mysqlcmd.Parameters.AddWithValue("_rut", txtCliente.Text);
                             MySqlDataReader result = mysqlcmd.ExecuteReader();
+
                             if (result.Read())
                             {
                                 lblMsgClient.Text = "";
