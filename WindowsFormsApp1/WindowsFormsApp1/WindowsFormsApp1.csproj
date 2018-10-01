@@ -55,22 +55,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abonar\Controller_Abonar.cs" />
+    <Compile Include="AddClient\Controller_AddClient.cs" />
+    <Compile Include="Client\Controller_Client.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1_Main.cs">
+    <Compile Include="Main\Controller_Main.cs" />
+    <Compile Include="Main\Form1_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1_Main.Designer.cs">
+    <Compile Include="Main\Form1_Main.Designer.cs">
       <DependentUpon>Form1_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2_Home.cs">
+    <Compile Include="Home\Controller_Home.cs" />
+    <Compile Include="Home\Form2_Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2_Home.Designer.cs">
+    <Compile Include="Home\Form2_Home.Designer.cs">
       <DependentUpon>Form2_Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Form3_Products.cs">
@@ -91,22 +97,22 @@
     <Compile Include="Form5_reports.Designer.cs">
       <DependentUpon>Form5_reports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Abonar.cs">
+    <Compile Include="Abonar\Form_Abonar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Abonar.Designer.cs">
+    <Compile Include="Abonar\Form_Abonar.Designer.cs">
       <DependentUpon>Form_Abonar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_AddClient.cs">
+    <Compile Include="AddClient\Form_AddClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_AddClient.Designer.cs">
+    <Compile Include="AddClient\Form_AddClient.Designer.cs">
       <DependentUpon>Form_AddClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Client.cs">
+    <Compile Include="Client\Form_Client.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Client.Designer.cs">
+    <Compile Include="Client\Form_Client.Designer.cs">
       <DependentUpon>Form_Client.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_ForgotPassword.cs">
@@ -121,10 +127,11 @@
     <Compile Include="Form_Importe.Designer.cs">
       <DependentUpon>Form_Importe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Login.cs">
+    <Compile Include="Login\Controller_Login.cs" />
+    <Compile Include="Login\Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Login.Designer.cs">
+    <Compile Include="Login\Form_Login.Designer.cs">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Perfil.cs">
@@ -159,10 +166,10 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1_Main.resx">
+    <EmbeddedResource Include="Main\Form1_Main.resx">
       <DependentUpon>Form1_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2_Home.resx">
+    <EmbeddedResource Include="Home\Form2_Home.resx">
       <DependentUpon>Form2_Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form3_Products.resx">
@@ -174,13 +181,13 @@
     <EmbeddedResource Include="Form5_reports.resx">
       <DependentUpon>Form5_reports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Abonar.resx">
+    <EmbeddedResource Include="Abonar\Form_Abonar.resx">
       <DependentUpon>Form_Abonar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_AddClient.resx">
+    <EmbeddedResource Include="AddClient\Form_AddClient.resx">
       <DependentUpon>Form_AddClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Client.resx">
+    <EmbeddedResource Include="Client\Form_Client.resx">
       <DependentUpon>Form_Client.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ForgotPassword.resx">
@@ -189,7 +196,7 @@
     <EmbeddedResource Include="Form_Importe.resx">
       <DependentUpon>Form_Importe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Login.resx">
+    <EmbeddedResource Include="Login\Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Perfil.resx">

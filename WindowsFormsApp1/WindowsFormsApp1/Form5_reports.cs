@@ -18,11 +18,12 @@ namespace WindowsFormsApp1
     public partial class Reportes : Form
     {
         string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-        string pathDocs = "C:/Users/naxo_/Desktop/DOCUMENTOS_DE_PRUEBAS/informe-";
+        string pathDocs = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\";
 
         public Reportes()
         {
             InitializeComponent();
+            Console.WriteLine(pathDocs);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

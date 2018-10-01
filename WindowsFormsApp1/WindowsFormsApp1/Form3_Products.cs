@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
         {
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
+
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("AddOrEditProducto", mysqlcon);
                 mysqlcmd.CommandType = CommandType.StoredProcedure;
