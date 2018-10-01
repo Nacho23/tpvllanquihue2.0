@@ -63,7 +63,9 @@ namespace WindowsFormsApp1
                         MySqlDataReader result = mysqlcmd.ExecuteReader();
                         if (result.Read())
                         {
-                            if (Convert.ToInt32(result.GetString(5).ToString()) > 0)
+                            Console.WriteLine();
+                            int stock_aux = Convert.ToInt32(result.GetString(5).ToString());
+                            if (stock_aux > 0 && stock_aux >= Convert.ToInt32(txtCantidad.Text))
                             {
                                 txtDescripcion.Text = result.GetString(1).ToString();
                                 txtCategoria.Text = result.GetString(2).ToString();
