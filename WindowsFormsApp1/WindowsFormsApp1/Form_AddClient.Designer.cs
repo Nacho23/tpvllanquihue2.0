@@ -88,21 +88,21 @@
             this.dtpBirthdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBirthdate.Location = new System.Drawing.Point(213, 186);
             this.dtpBirthdate.Name = "dtpBirthdate";
-            this.dtpBirthdate.Size = new System.Drawing.Size(310, 30);
+            this.dtpBirthdate.Size = new System.Drawing.Size(310, 25);
             this.dtpBirthdate.TabIndex = 3;
             // 
             // cbSex
             // 
             this.cbSex.Font = new System.Drawing.Font("Century Gothic", 10.8F);
             this.cbSex.FormattingEnabled = true;
-            this.cbSex.ItemHeight = 21;
+            this.cbSex.ItemHeight = 19;
             this.cbSex.Items.AddRange(new object[] {
             "MASCULINO",
             "FEMENINO",
             "OTRO"});
             this.cbSex.Location = new System.Drawing.Point(213, 248);
             this.cbSex.Name = "cbSex";
-            this.cbSex.Size = new System.Drawing.Size(310, 29);
+            this.cbSex.Size = new System.Drawing.Size(310, 27);
             this.cbSex.TabIndex = 40;
             // 
             // txtObservations
@@ -121,7 +121,7 @@
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(38, 422);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(169, 22);
+            this.label8.Size = new System.Drawing.Size(133, 20);
             this.label8.TabIndex = 39;
             this.label8.Text = "OBSERVACIONES";
             // 
@@ -130,7 +130,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.Location = new System.Drawing.Point(213, 376);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(310, 30);
+            this.txtEmail.Size = new System.Drawing.Size(310, 25);
             this.txtEmail.TabIndex = 7;
             // 
             // txtAddress
@@ -138,7 +138,7 @@
             this.txtAddress.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddress.Location = new System.Drawing.Point(213, 333);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(310, 30);
+            this.txtAddress.Size = new System.Drawing.Size(310, 25);
             this.txtAddress.TabIndex = 6;
             // 
             // label9
@@ -148,7 +148,7 @@
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(38, 379);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 22);
+            this.label9.Size = new System.Drawing.Size(55, 20);
             this.label9.TabIndex = 38;
             this.label9.Text = "EMAIL";
             // 
@@ -159,7 +159,7 @@
             this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(38, 337);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(117, 22);
+            this.label10.Size = new System.Drawing.Size(95, 20);
             this.label10.TabIndex = 37;
             this.label10.Text = "DIRECCIÓN";
             // 
@@ -168,8 +168,9 @@
             this.txtPhone.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhone.Location = new System.Drawing.Point(213, 290);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(310, 30);
+            this.txtPhone.Size = new System.Drawing.Size(310, 25);
             this.txtPhone.TabIndex = 5;
+            this.txtPhone.Text = "0";
             // 
             // label7
             // 
@@ -178,7 +179,7 @@
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(38, 293);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(104, 22);
+            this.label7.Size = new System.Drawing.Size(81, 20);
             this.label7.TabIndex = 33;
             this.label7.Text = "TELEFONO";
             // 
@@ -187,7 +188,7 @@
             this.txtName.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Location = new System.Drawing.Point(213, 131);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(310, 30);
+            this.txtName.Size = new System.Drawing.Size(310, 25);
             this.txtName.TabIndex = 2;
             // 
             // txtRut
@@ -195,7 +196,7 @@
             this.txtRut.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRut.Location = new System.Drawing.Point(213, 87);
             this.txtRut.Name = "txtRut";
-            this.txtRut.Size = new System.Drawing.Size(310, 30);
+            this.txtRut.Size = new System.Drawing.Size(310, 25);
             this.txtRut.TabIndex = 1;
             // 
             // label6
@@ -205,7 +206,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(38, 251);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 22);
+            this.label6.Size = new System.Drawing.Size(46, 20);
             this.label6.TabIndex = 32;
             this.label6.Text = "SEXO";
             // 
@@ -216,7 +217,7 @@
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(38, 203);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(130, 22);
+            this.label11.Size = new System.Drawing.Size(105, 20);
             this.label11.TabIndex = 30;
             this.label11.Text = "NACIMIENTO";
             // 
@@ -227,7 +228,7 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(38, 180);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 22);
+            this.label5.Size = new System.Drawing.Size(57, 20);
             this.label5.TabIndex = 31;
             this.label5.Text = "FECHA";
             // 
@@ -238,7 +239,7 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(38, 133);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 22);
+            this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 29;
             this.label4.Text = "NOMBRE";
             // 
@@ -249,7 +250,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(38, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 22);
+            this.label3.Size = new System.Drawing.Size(34, 20);
             this.label3.TabIndex = 28;
             this.label3.Text = "RUT";
             // 
@@ -260,13 +261,13 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 22);
+            this.label2.Size = new System.Drawing.Size(107, 20);
             this.label2.TabIndex = 42;
             this.label2.Text = "Datos Cliente";
             // 
             // Form_AddClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(102)))));
             this.ClientSize = new System.Drawing.Size(553, 598);
