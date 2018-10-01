@@ -101,7 +101,12 @@ namespace WindowsFormsApp1
 
         private void btnAcceder_Click(object sender, EventArgs e)
         {
-            if(Controller_Login.loginUser(txtUsuario.Text, txtContrasena.Text))
+            login(e);
+        }
+
+        private void login(EventArgs e)
+        {
+            if (Controller_Login.loginUser(txtUsuario.Text, txtContrasena.Text))
             {
                 this.Hide();
                 Controller_Login.registerSession(txtUsuario.Text);
@@ -116,13 +121,20 @@ namespace WindowsFormsApp1
                 txtContrasena_Leave(null, e);
                 txtUsuario.Focus();
             }
-
         }
 
         private void linkContrasena_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form_ForgotPassword form_ForgotPassword = new Form_ForgotPassword();
             form_ForgotPassword.Show();
+        }
+
+        private void txtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                login(e);
+            }
         }
     }
 }

@@ -255,7 +255,7 @@ namespace WindowsFormsApp1
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                if (txtIngresoProducto.Text == "")
+                if (txtIngresoProducto.Text == "Buscar Producto" || txtIngresoProducto.Text == "")
                 {
                     lbMensaje.Text = "Debe ingresar un codigo";
                     lbMensaje.Visible = true;
