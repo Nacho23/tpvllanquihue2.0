@@ -290,13 +290,16 @@ namespace WindowsFormsApp1
 
         private void dgvVenta_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvVenta.CurrentRow.Index != -1)
+            if(dgvVenta.Rows.Count > 0)
             {
-                txtDescripcion.Text = dgvVenta.CurrentRow.Cells[1].Value.ToString();
-                txtCategoria.Text = dgvVenta.CurrentRow.Cells[2].Value.ToString();
-                txtProveedor.Text = dgvVenta.CurrentRow.Cells[3].Value.ToString();
-                txtPrecio.Text = Convert.ToString(Convert.ToInt32(dgvVenta.CurrentRow.Cells[5].Value.ToString()) /
-                    Convert.ToInt32(dgvVenta.CurrentRow.Cells[4].Value.ToString()));
+                if (dgvVenta.CurrentRow.Index != -1)
+                {
+                    txtDescripcion.Text = dgvVenta.CurrentRow.Cells[1].Value.ToString();
+                    txtCategoria.Text = dgvVenta.CurrentRow.Cells[2].Value.ToString();
+                    txtProveedor.Text = dgvVenta.CurrentRow.Cells[3].Value.ToString();
+                    txtPrecio.Text = Convert.ToString(Convert.ToInt32(dgvVenta.CurrentRow.Cells[5].Value.ToString()) /
+                        Convert.ToInt32(dgvVenta.CurrentRow.Cells[4].Value.ToString()));
+                }
             }
         }
 
