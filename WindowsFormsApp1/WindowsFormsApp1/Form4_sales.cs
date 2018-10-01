@@ -63,7 +63,9 @@ namespace WindowsFormsApp1
                         MySqlDataReader result = mysqlcmd.ExecuteReader();
                         if (result.Read())
                         {
-                            if (Convert.ToInt32(result.GetString(5).ToString()) > 0)
+                            Console.WriteLine();
+                            int stock_aux = Convert.ToInt32(result.GetString(5).ToString());
+                            if (stock_aux > 0 && stock_aux >= Convert.ToInt32(txtCantidad.Text))
                             {
                                 txtDescripcion.Text = result.GetString(1).ToString();
                                 txtCategoria.Text = result.GetString(2).ToString();
@@ -290,13 +292,16 @@ namespace WindowsFormsApp1
 
         private void dgvVenta_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvVenta.CurrentRow.Index != -1)
+            if(dgvVenta.Rows.Count > 0)
             {
-                txtDescripcion.Text = dgvVenta.CurrentRow.Cells[1].Value.ToString();
-                txtCategoria.Text = dgvVenta.CurrentRow.Cells[2].Value.ToString();
-                txtProveedor.Text = dgvVenta.CurrentRow.Cells[3].Value.ToString();
-                txtPrecio.Text = Convert.ToString(Convert.ToInt32(dgvVenta.CurrentRow.Cells[5].Value.ToString()) /
-                    Convert.ToInt32(dgvVenta.CurrentRow.Cells[4].Value.ToString()));
+                if (dgvVenta.CurrentRow.Index != -1)
+                {
+                    txtDescripcion.Text = dgvVenta.CurrentRow.Cells[1].Value.ToString();
+                    txtCategoria.Text = dgvVenta.CurrentRow.Cells[2].Value.ToString();
+                    txtProveedor.Text = dgvVenta.CurrentRow.Cells[3].Value.ToString();
+                    txtPrecio.Text = Convert.ToString(Convert.ToInt32(dgvVenta.CurrentRow.Cells[5].Value.ToString()) /
+                        Convert.ToInt32(dgvVenta.CurrentRow.Cells[4].Value.ToString()));
+                }
             }
         }
 
@@ -399,20 +404,27 @@ namespace WindowsFormsApp1
         //Valida rut Chileno
         public static bool ValidaRut(string rut)
         {
-            rut = rut.Replace(".", "").ToUpper();
-            Regex expresion = new Regex("^([0-9]+-[0-9K])$");
-            string dv = rut.Substring(rut.Length - 1, 1);
-            if (!expresion.IsMatch(rut))
+            if(rut.Length >= 11)
             {
                 return false;
-            }
-            char[] charCorte = { '-' };
-            string[] rutTemp = rut.Split(charCorte);
-            if (dv != Digito(int.Parse(rutTemp[0])))
+            } else
             {
-                return false;
+                rut = rut.Replace(".", "").ToUpper();
+                Regex expresion = new Regex("^([0-9]+-[0-9K])$");
+                string dv = rut.Substring(rut.Length - 1, 1);
+                if (!expresion.IsMatch(rut))
+                {
+                    return false;
+                }
+                char[] charCorte = { '-' };
+                string[] rutTemp = rut.Split(charCorte);
+                if (dv != Digito(int.Parse(rutTemp[0])))
+                {
+                    return false;
+                }
+                return true;
             }
-            return true;
+
         }
 
         //Metodo que valida el digito verificar, de acuerdo a la mantiza del rut

@@ -32,7 +32,12 @@ namespace WindowsFormsApp1
                 DataTable dataTableClientes = new DataTable();
                 sqlDa.Fill(dataTableClientes);
                 dgvClients.DataSource = dataTableClientes;
-                //dgvClients.Columns[6].Visible = false;
+                dgvClients.Columns[3].Visible = false;
+                dgvClients.Columns[4].Visible = false;
+                dgvClients.Columns[5].Visible = false;
+                dgvClients.Columns[6].Visible = false;
+                dgvClients.Columns[7].Visible = false;
+                dgvClients.Columns[8].Visible = false;
             }
         }
 
@@ -70,6 +75,12 @@ namespace WindowsFormsApp1
                 txtRut.Text = dgvClients.CurrentRow.Cells[0].Value.ToString();
                 txtName.Text = dgvClients.CurrentRow.Cells[1].Value.ToString();
                 txtDeuda.Text = dgvClients.CurrentRow.Cells[2].Value.ToString();
+                txtBirthDate.Text = dgvClients.CurrentRow.Cells[3].Value.ToString();
+                txtSex.Text = dgvClients.CurrentRow.Cells[4].Value.ToString();
+                txtPhone.Text = dgvClients.CurrentRow.Cells[5].Value.ToString();
+                txtAddress.Text = dgvClients.CurrentRow.Cells[6].Value.ToString();
+                txtEmail.Text = dgvClients.CurrentRow.Cells[7].Value.ToString();
+                txtObs.Text = dgvClients.CurrentRow.Cells[8].Value.ToString();
             }
         }
 
@@ -81,6 +92,11 @@ namespace WindowsFormsApp1
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }
