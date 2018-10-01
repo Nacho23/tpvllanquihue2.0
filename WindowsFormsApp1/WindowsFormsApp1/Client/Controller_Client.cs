@@ -20,7 +20,8 @@ namespace WindowsFormsApp1.Client
             sqlDa.SelectCommand.Parameters.AddWithValue("_id", text);
             DataTable dataTableClientes = new DataTable();
             sqlDa.Fill(dataTableClientes);
-            return dataTableClientes;
+            mysqlcon.Close();
+            return dataTableClientes;            
         } 
     }
 }
