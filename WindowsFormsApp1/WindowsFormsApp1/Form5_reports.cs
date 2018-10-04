@@ -12,13 +12,15 @@ using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Threading;
 
 namespace WindowsFormsApp1
 {
     public partial class Reportes : Form
     {
         string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-        string pathDocs = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\";
+        string pathDocs = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\INFORMES\\";
+
 
         public Reportes()
         {
@@ -89,6 +91,7 @@ namespace WindowsFormsApp1
             completaCB();
             cbDias.SelectedText = DateTime.Now.ToString("dd");
             cbMeses.SelectedText = DateTime.Now.ToString("MM");
+            cbAnio.SelectedText = "2018";
         }
 
         private void completaCB()
@@ -162,6 +165,12 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            generaInformeDiasMes();
+        }
+
+        private void generaInformeDiasMes()
+        {
+
             //ABRIR EL DOCUMENTO
             FileStream fs = new FileStream(pathDocs + cbDias.Text + "-" + cbMeses.Text + ".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document();
@@ -227,14 +236,17 @@ namespace WindowsFormsApp1
                     mysqlcon.Close();
 
                     //POR CADA PROVEEDOR OBTENEMOS INFO DEL SUS PRODUCTOS, TOTAL DE INGRESOS Y TOTAL DE GANANCIAS
-                    for(int i = 0; i < proveedores.Length; i++)
+                    string fecha = cbAnio.Text + "-" + cbMeses.Text + "-" + cbDias.Text;
+                    for (int i = 0; i < proveedores.Length; i++)
                     {
-                        string name = i.ToString(); 
+                        string name = i.ToString();
+                        string proveedor = proveedores[i];
 
                         mysqlcon.Open();
-                        MySqlDataAdapter mysqlcmd2 = new MySqlDataAdapter("getProductByProveedor", mysqlcon);
+                        MySqlDataAdapter mysqlcmd2 = new MySqlDataAdapter("getVentasDiarias", mysqlcon);
                         mysqlcmd2.SelectCommand.CommandType = CommandType.StoredProcedure;
                         mysqlcmd2.SelectCommand.Parameters.AddWithValue("_proveedor", proveedores[i]);
+                        mysqlcmd2.SelectCommand.Parameters.AddWithValue("_fecha", fecha);
                         DataTable dataTableResult = new DataTable();
                         mysqlcmd2.Fill(dataTableResult);
 
@@ -261,7 +273,7 @@ namespace WindowsFormsApp1
                                 CultureInfo cl = new CultureInfo("es-CL");
                                 ingresoTotal = result3.GetInt32(0).ToString("C", cl);
                             }
-                        } 
+                        }
                         mysqlcon.Close();
 
                         string gananciaTotal = "";
@@ -288,11 +300,8 @@ namespace WindowsFormsApp1
                         }
                         mysqlcon.Close();
 
-                        Console.WriteLine("INGRESO" + ingresoTotal);
-                        Console.WriteLine("GANANCIA" + gananciaTotal);
-
                         //EXPORTAR AL DOCUMENTO POR CADA ITERACION
-                        exportInfoToPDFDias(document, dataTableResult, ingresoTotal, gananciaTotal);
+                        exportInfoToPDFDias(document, dataTableResult, proveedor, ingresoTotal, gananciaTotal);
                     }
 
 
@@ -308,7 +317,7 @@ namespace WindowsFormsApp1
             #endregion ConexionBD
         }
 
-        public void exportInfoToPDFDias(Document document, DataTable dataTableResult, string ingresoTotal, string gananciaTotal)
+        public void exportInfoToPDFDias(Document document, DataTable dataTableResult, string proveedor, string ingresoTotal, string gananciaTotal)
         {
 
             //Tabla (SI NO RETORNA COLUMNAS VALIDAS, 
@@ -323,6 +332,9 @@ namespace WindowsFormsApp1
             //RETORNA COLUMNAS VALIDAS
             {
                 PdfPTable table = new PdfPTable(dataTableResult.Columns.Count);
+
+                document.Add(new Paragraph("Proveedor: " + proveedor));
+                document.Add(new Chunk("\n"));
 
                 //COLUMNAS TABLA
                 BaseFont btnColumnHeader = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
@@ -499,5 +511,6 @@ namespace WindowsFormsApp1
 
             #endregion ConexionBD
         }
+
     }
 }

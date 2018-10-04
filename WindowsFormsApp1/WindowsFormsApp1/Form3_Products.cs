@@ -15,8 +15,9 @@ namespace WindowsFormsApp1
     public partial class Productos : Form
     {
         string connectionString = "server = 35.198.31.209; user = tpvllanq; database = tpvllanquihueDB; port = 3306; password = 18653129a; SslMode=none";
-        int id = 0;
+        long id = 0;
         string rut;
+        int inicio = 0;
 
         public Productos(string rut)
         {
@@ -28,7 +29,7 @@ namespace WindowsFormsApp1
         {
             using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
             {
-
+                Console.WriteLine(id);
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("AddOrEditProducto", mysqlcon);
                 mysqlcmd.CommandType = CommandType.StoredProcedure;
@@ -38,7 +39,7 @@ namespace WindowsFormsApp1
                 mysqlcmd.Parameters.AddWithValue("_proveedor", cbProveedor.Text);
                 mysqlcmd.Parameters.AddWithValue("_precio", txtPrecio.Text.Trim());
                 mysqlcmd.Parameters.AddWithValue("_stock", txtStock.Text.Trim());
-                mysqlcmd.Parameters.AddWithValue("_codigo", txtCodigo.Text.Trim());
+                mysqlcmd.Parameters.AddWithValue("_codigo", Convert.ToInt64(txtCodigo.Text.Trim()));
                 mysqlcmd.Parameters.AddWithValue("_rut", this.rut);
                 mysqlcmd.ExecuteNonQuery();
                 clear();
@@ -55,6 +56,7 @@ namespace WindowsFormsApp1
                 mysqlcon.Open();
                 MySqlDataAdapter sqlDa = new MySqlDataAdapter("ViewAllProducto", mysqlcon);
                 sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                sqlDa.SelectCommand.Parameters.AddWithValue("_inicio", inicio);
                 DataTable dataTableProductos = new DataTable();
                 sqlDa.Fill(dataTableProductos);
                 dgvProductos.DataSource = dataTableProductos;
@@ -103,7 +105,7 @@ namespace WindowsFormsApp1
                 cbProveedor.Text = dgvProductos.CurrentRow.Cells[4].Value.ToString();
                 txtPrecio.Text = dgvProductos.CurrentRow.Cells[3].Value.ToString();
                 txtStock.Text = dgvProductos.CurrentRow.Cells[5].Value.ToString();
-                id = Convert.ToInt32(dgvProductos.CurrentRow.Cells[0].Value.ToString());
+                id = Convert.ToInt64(dgvProductos.CurrentRow.Cells[0].Value.ToString());
                 btnGuardar.Text = "Actualizar";
                 btnDescontinuar.Enabled = true;
             }
@@ -116,7 +118,7 @@ namespace WindowsFormsApp1
                 mysqlcon.Open();
                 MySqlCommand mysqlcmd = new MySqlCommand("EditStateProducto", mysqlcon);
                 mysqlcmd.CommandType = CommandType.StoredProcedure;
-                mysqlcmd.Parameters.AddWithValue("_codigo", txtCodigo.Text);
+                mysqlcmd.Parameters.AddWithValue("_codigo", Convert.ToInt64(txtCodigo.Text));
                 mysqlcmd.ExecuteNonQuery();
                 clear();
                 MessageBox.Show("Eliminado Correctamente");
@@ -125,18 +127,38 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void txtBuscarProducto_TextChanged(object sender, EventArgs e)
+        private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+            inicio = inicio + 25;
+            fillGrid();
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            if (inicio != 0)
             {
-                mysqlcon.Open();
-                MySqlDataAdapter sqlDa = new MySqlDataAdapter("SearchByValueProducto", mysqlcon);
-                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-                sqlDa.SelectCommand.Parameters.AddWithValue("_SearchValue", txtBuscarProducto.Text);
-                DataTable dataTableProveedores = new DataTable();
-                sqlDa.Fill(dataTableProveedores);
-                dgvProductos.DataSource = dataTableProveedores;
-                dgvProductos.Columns[6].Visible = false;
+                inicio = inicio - 25;
+                fillGrid();
+            }
+        }
+
+        private void txtBuscarProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                inicio = 0;
+                using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+                {
+                    mysqlcon.Open();
+                    MySqlDataAdapter sqlDa = new MySqlDataAdapter("SearchByValueProducto", mysqlcon);
+                    sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDa.SelectCommand.Parameters.AddWithValue("_SearchValue", txtBuscarProducto.Text);
+                    sqlDa.SelectCommand.Parameters.AddWithValue("_inicio", inicio);
+                    DataTable dataTableProveedores = new DataTable();
+                    sqlDa.Fill(dataTableProveedores);
+                    dgvProductos.DataSource = dataTableProveedores;
+                    dgvProductos.Columns[6].Visible = false;
+                }
             }
         }
     }

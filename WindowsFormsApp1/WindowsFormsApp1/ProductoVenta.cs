@@ -10,7 +10,8 @@ namespace WindowsFormsApp1
     class ProductoVenta
     {
         string descripcion, categoria, proveedor;
-        int codigo, cantidad, precio;
+        int cantidad, precio, stock;
+        long codigo;
 
         public string Descripcion
         {
@@ -51,7 +52,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public int Codigo
+        public long Codigo
         {
             get
             {
@@ -77,6 +78,20 @@ namespace WindowsFormsApp1
             }
         }
 
+
+        public int Stock
+        {
+            get
+            {
+                return stock;
+            }
+
+            set
+            {
+                stock = value;
+            }
+        }
+
         public int Precio
         {
             get
@@ -90,7 +105,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public bool addProduct(int cantidad)
+        public bool addProducte(int cantidad)
         {
             MySqlConnection mysqlcon = Connection.initConnection();
             mysqlcon.Open();
@@ -103,18 +118,27 @@ namespace WindowsFormsApp1
                 int cantidadLlevar = cantidad + this.Cantidad;
                 if (cantidadLlevar > Convert.ToInt32(result.GetString(0).ToString()))
                 {
+                    mysqlcon.Close();
                     return false;
                 } else
                 {
+                    mysqlcon.Close();
                     this.Cantidad = this.Cantidad + cantidad;
                     return true;
                 }
             } else
             {
+                mysqlcon.Close();
                 Console.WriteLine("No es posible realizar la consulta");
                 return true;
             }
 
+        }
+
+        public int addProduct(int cantidad)
+        {
+            this.Cantidad = this.Cantidad + cantidad;
+            return this.Cantidad;
         }
 
         public int removeProduct()

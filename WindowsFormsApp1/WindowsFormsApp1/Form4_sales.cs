@@ -48,24 +48,36 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void txtIngresoProducto_KeyPress(object sender, KeyPressEventArgs e)
+        private void ingresaProducto()
         {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter))
-            {
+
                 if (txtCantidad.Text.Trim() != "" && txtIngresoProducto.Text.Trim() != "")
                 {
                     using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
                     {
+                        Console.WriteLine("inicio busqueda");
                         mysqlcon.Open();
                         MySqlCommand mysqlcmd = new MySqlCommand("SearchProductByCode", mysqlcon);
                         mysqlcmd.CommandType = CommandType.StoredProcedure;
-                        mysqlcmd.Parameters.AddWithValue("_codigo", txtIngresoProducto.Text);
+                        mysqlcmd.Parameters.AddWithValue("_codigo", Convert.ToInt64(txtIngresoProducto.Text));
                         MySqlDataReader result = mysqlcmd.ExecuteReader();
                         if (result.Read())
                         {
-                            Console.WriteLine();
+                            Console.WriteLine("fin búsqueda");
                             int stock_aux = Convert.ToInt32(result.GetString(5).ToString());
-                            if (stock_aux > 0 && stock_aux >= Convert.ToInt32(txtCantidad.Text))
+                            bool cont = true;
+                            if (listaVentas.Count > 0)
+                            {
+                                Console.WriteLine(listaVentas[0].Cantidad);
+                                if(stock_aux > listaVentas[0].Cantidad)
+                                {
+                                    cont = true;
+                                } else
+                                {
+                                    cont = false;
+                                }
+                            }
+                            if (stock_aux > 0 && stock_aux >= Convert.ToInt32(txtCantidad.Text) && cont)
                             {
                                 txtDescripcion.Text = result.GetString(1).ToString();
                                 txtCategoria.Text = result.GetString(2).ToString();
@@ -93,17 +105,8 @@ namespace WindowsFormsApp1
                                         {
                                             if (txtIngresoProducto.Text == Convert.ToString(listaVentas[i].Codigo))
                                             {
-                                                bool resultado = listaVentas[i].addProduct(Convert.ToInt32(txtCantidad.Text));
-                                                if (!resultado)
-                                                {
-                                                    lbMensaje.Text = "Cantidad sobrepasa al Stock";
-                                                    lbMensaje.Visible = true;
-                                                    txtCantidad.Focus();
-                                                }
-                                                else
-                                                {
-                                                    lbMensaje.Visible = false;
-                                                }
+                                                listaVentas[i].addProduct(Convert.ToInt32(txtCantidad.Text));
+                                                lbMensaje.Visible = false;
                                             }
                                         }
                                         inicializaTabla();
@@ -116,7 +119,7 @@ namespace WindowsFormsApp1
                                         productoVenta.Categoria = result.GetString(2).ToString();
                                         productoVenta.Proveedor = result.GetString(4).ToString();
                                         productoVenta.Precio = Convert.ToInt32(result.GetString(3).ToString());
-                                        productoVenta.Codigo = Convert.ToInt32(result.GetString(0).ToString());
+                                        productoVenta.Codigo = Convert.ToInt64(result.GetString(0).ToString());
                                         productoVenta.Cantidad = Convert.ToInt32(txtCantidad.Text);
                                         listaVentas.Add(productoVenta);
                                         inicializaTabla();
@@ -130,7 +133,7 @@ namespace WindowsFormsApp1
                                     productoVenta.Categoria = result.GetString(2).ToString();
                                     productoVenta.Proveedor = result.GetString(4).ToString();
                                     productoVenta.Precio = Convert.ToInt32(result.GetString(3).ToString());
-                                    productoVenta.Codigo = Convert.ToInt32(result.GetString(0).ToString());
+                                    productoVenta.Codigo = Convert.ToInt64(result.GetString(0).ToString());
                                     productoVenta.Cantidad = Convert.ToInt32(txtCantidad.Text);
                                     listaVentas.Add(productoVenta);
                                     inicializaTabla();
@@ -151,9 +154,100 @@ namespace WindowsFormsApp1
                     lbMensaje.Text = "Existen campos vacíos";
                     lbMensaje.Visible = true;
                 }
-            }
+            
             txtIngresoProducto.Focus();
         }
+
+        private void txtIngresoProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                if (txtCantidad.Text.Trim() != "" && txtIngresoProducto.Text.Trim() != "")
+                {
+                    using (MySqlConnection mysqlcon = new MySqlConnection(connectionString))
+                    {
+                        mysqlcon.Open();
+                        MySqlCommand mysqlcmd = new MySqlCommand("SearchProductByCode", mysqlcon);
+                        mysqlcmd.CommandType = CommandType.StoredProcedure;
+                        mysqlcmd.Parameters.AddWithValue("_codigo", Convert.ToInt64(txtIngresoProducto.Text));
+                        MySqlDataReader result = mysqlcmd.ExecuteReader();
+                        if (result.Read())
+                        {
+                            ProductoVenta productoVenta = new ProductoVenta();
+                            productoVenta.Descripcion = result.GetString(1).ToString();
+                            productoVenta.Categoria = result.GetString(2).ToString();
+                            productoVenta.Proveedor = result.GetString(4).ToString();
+                            productoVenta.Precio = Convert.ToInt32(result.GetString(3).ToString());
+                            productoVenta.Codigo = Convert.ToInt64(result.GetString(0).ToString());
+                            productoVenta.Stock = Convert.ToInt32(result.GetString(5).ToString());
+
+                            bool seRepite = false;
+                            foreach (DataGridViewRow Row in dgvVenta.Rows)
+                            {
+                                string valor = Convert.ToString(Row.Cells["Codigo"].Value);
+                                if (valor == Convert.ToString(productoVenta.Codigo))
+                                {
+                                    seRepite = true;
+                                }
+                            }
+
+                            if(seRepite)
+                            {
+                                Console.WriteLine("SE REPITE");
+                                //RECORRE LA LISTA DE PRODUCTOS INGRESADOS
+                                for (int i = 0; i < listaVentas.Count; i++)
+                                {
+                                    if (txtIngresoProducto.Text == Convert.ToString(listaVentas[i].Codigo))
+                                    {
+                                        //VERIFICA STOCK
+                                        if (productoVenta.Stock >= Convert.ToInt32(txtCantidad.Text) + listaVentas[i].Cantidad)
+                                        {
+                                            listaVentas[i].addProduct(Convert.ToInt32(txtCantidad.Text));
+                                            lbMensaje.Visible = false;
+                                        } else
+                                        {
+                                            lbMensaje.Text = "NO EXISTE STOCK";
+                                            lbMensaje.Visible = true;
+                                        }
+                                    }
+                                }
+                                inicializaTabla();
+                            }
+                            else
+                            {
+                                //VERIFICA STOCK
+                                if (productoVenta.Stock >= Convert.ToInt32(txtCantidad.Text))
+                                {
+                                    productoVenta.addProduct(Convert.ToInt32(txtCantidad.Text));
+                                    listaVentas.Add(productoVenta);
+                                    inicializaTabla();
+                                    lbMensaje.Visible = false;
+                                } else
+                                {
+                                    lbMensaje.Text = "NO EXISTE STOCK";
+                                    lbMensaje.Visible = true;
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            lbMensaje.Text = "EL PRODUCTO NO EXISTE";
+                            lbMensaje.Visible = true;
+                        }
+                        mysqlcon.Close();
+                    }
+                    txtCantidad.Text = "1";
+                    txtIngresoProducto.Text = "";
+                    txtIngresoProducto.Focus();
+                } else
+                {
+                    lbMensaje.Text = "Existen campos vacíos";
+                    lbMensaje.Visible = true;
+                }
+            }
+        }
+
 
         private void Ventas_Load(object sender, EventArgs e)
         {
@@ -192,7 +286,7 @@ namespace WindowsFormsApp1
             DataView view;
 
             column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
+            column.DataType = System.Type.GetType("System.Int64");
             column.ColumnName = "Codigo";
             dataTableProductos.Columns.Add(column);
 
@@ -506,7 +600,7 @@ namespace WindowsFormsApp1
                                 MySqlCommand mysqlcmd2 = new MySqlCommand("insertVentaProducto", mysqlcon);
                                 mysqlcmd2.CommandType = CommandType.StoredProcedure;
                                 mysqlcmd2.Parameters.AddWithValue("_id_venta", _id_venta);
-                                mysqlcmd2.Parameters.AddWithValue("_codigo_producto", listaVentas[i].Codigo);
+                                mysqlcmd2.Parameters.AddWithValue("_codigo_producto", Convert.ToInt64(listaVentas[i].Codigo));
                                 mysqlcmd2.Parameters.AddWithValue("_cantidad", listaVentas[i].Cantidad);
                                 mysqlcmd2.ExecuteNonQuery();
                                 mysqlcon.Close();
@@ -514,7 +608,7 @@ namespace WindowsFormsApp1
                                 mysqlcon.Open();
                                 MySqlCommand mysqlcmd3 = new MySqlCommand("addGanancia", mysqlcon);
                                 mysqlcmd3.CommandType = CommandType.StoredProcedure;
-                                mysqlcmd3.Parameters.AddWithValue("_codigo", Convert.ToInt32(listaVentas[i].Codigo));
+                                mysqlcmd3.Parameters.AddWithValue("_codigo", Convert.ToInt64(listaVentas[i].Codigo));
                                 mysqlcmd3.Parameters.AddWithValue("_id_venta", _id_venta);
                                 mysqlcmd3.Parameters.AddWithValue("_proveedor", txtProveedor.Text);
                                 mysqlcmd3.Parameters.AddWithValue("_precio", Convert.ToInt32(listaVentas[i].Cantidad * listaVentas[i].Precio));
@@ -525,7 +619,7 @@ namespace WindowsFormsApp1
                                 mysqlcon.Open();
                                 MySqlCommand mysqlcmd4 = new MySqlCommand("deductCantidad", mysqlcon);
                                 mysqlcmd4.CommandType = CommandType.StoredProcedure;
-                                mysqlcmd4.Parameters.AddWithValue("_codigo", listaVentas[i].Codigo);
+                                mysqlcmd4.Parameters.AddWithValue("_codigo", Convert.ToInt64(listaVentas[i].Codigo));
                                 mysqlcmd4.Parameters.AddWithValue("_cantidadReducir", listaVentas[i].Cantidad);
                                 mysqlcmd4.ExecuteNonQuery();
                                 mysqlcon.Close();

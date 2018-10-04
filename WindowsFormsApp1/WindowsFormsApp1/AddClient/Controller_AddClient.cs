@@ -39,6 +39,10 @@ namespace WindowsFormsApp1.AddClient
 
         public static void addOrEditClient(string rut, string nombre, string fecha_nac, string sexo, string telefono, string direccion, string email, string observaciones)
         {
+            if(telefono.Trim() == "")
+            {
+                telefono = "0";
+            }
             mysqlcon.Open();
             MySqlCommand mysqlcmd = new MySqlCommand("AddOrEditClient", mysqlcon);
             mysqlcmd.CommandType = CommandType.StoredProcedure;
@@ -46,7 +50,7 @@ namespace WindowsFormsApp1.AddClient
             mysqlcmd.Parameters.AddWithValue("_nombre", nombre);
             mysqlcmd.Parameters.AddWithValue("_fecha_nac", fecha_nac);
             mysqlcmd.Parameters.AddWithValue("_sexo", sexo);
-            mysqlcmd.Parameters.AddWithValue("_telefono", telefono);
+            mysqlcmd.Parameters.AddWithValue("_telefono", Convert.ToInt32(telefono));
             mysqlcmd.Parameters.AddWithValue("_direccion", direccion);
             mysqlcmd.Parameters.AddWithValue("_email", email);
             mysqlcmd.Parameters.AddWithValue("_observaciones", observaciones);

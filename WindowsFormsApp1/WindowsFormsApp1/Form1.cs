@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
 
         void clear()
         {
-            txtDireccion.Text = txtEmail.Text = txtNombre.Text = txtTelefono.Text = "";
+            txtDireccion.Text = txtEmail.Text = txtNombre.Text = txtTelefono.Text = txtGanancia.Text = "";
             id = 0;
             btnGuardar.Text = "Guardar";
             btnBorrar.Enabled = false;
